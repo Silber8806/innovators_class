@@ -26,12 +26,14 @@ print
 print("Your subtotal is: %s" % total)
 print("your tax is: %s" % tax_total)
 print("Grand Total: %s" % grand_total)
+print
+print 
 
 # second purchase
 
 # decide to purchase an extra celery
 celery_qty = celery_qty + 1
-total = total + Chicken_wings * Chicken_wings_qty + celery * celery_qty)
+total = total + Chicken_wings * Chicken_wings_qty + celery * celery_qty
 tax_total = total * tax_rate
 grand_total = total + tax_total
 
@@ -44,6 +46,8 @@ print
 print("Your subtotal is: %s" % total)
 print("your tax is: %s" % tax_total)
 print("Grand Total: %s" % grand_total)
+print 
+print
 
 # third purchase
 # actual I changed my mind, I just want breadsticks
