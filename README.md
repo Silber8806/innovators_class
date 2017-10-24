@@ -4,7 +4,7 @@ This is the code for Health Innovators Python class.  A free class for people th
 
 The presentation is hosted on Google Cloud:
 
-https://drive.google.com/drive/folders/0B6B4DxZyu3xqUlZKTXlFRUdodHM
+https://drive.google.com/drive/folders/0B6B4DxZyu3xqYkVSUjVvQUVKcEk
 
 The code is present in this repositiory.  This is great place for practicing Python skills.
 
