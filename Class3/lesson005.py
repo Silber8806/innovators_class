@@ -1,7 +1,5 @@
-# Truthy values:
-
 print("The following values are treated")
-print("As if they are true or false...")
+print("As if they are true or false")
 print
 print("True:")
 print(bool(1))

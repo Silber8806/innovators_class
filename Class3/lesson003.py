@@ -10,8 +10,6 @@ print("Dogs Bark?")
 
 print(Paws == True and Fur == True and Bark == True)
 
-print("True/False:")
-
 print(Paws * 1 + Fur * 1 - Bark * 1)
 
 print("When arthimetic is applied to Booleans:")
