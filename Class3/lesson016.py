@@ -1,19 +1,35 @@
-vehicle_id = 1
-max_number_of_vehicles = 500
+# example 1
 
-vehicle0 = 'Mustang'
-vehicle1 = 'Civic'
-vehicle2 = "Ninja (motorcycle"
-line_item = 'vehicle: %s is a %s'
+print("example 1")
+i = 0
+while(True):
+	print(i)
+	if (i == 5):
+		break
+	else:
+		i = i + 1
 
-while(vehicle_id <= max_number_of_vehicles):
-	if(vehicle_id % 3 == 0):
-		vehicle_type = vehicle0
-	elif(vehicle_id % 3 == 1):
-		vehicle_type = vehicle1
-	elif(vehicle_id % 3 == 2):
-		vehicle_type = vehicle2
-	print(line_item % (vehicle_id, vehicle_type))
-	vehicle_id += 1
+# example 2
 
-print("factory cool down!")
+print("example 2")
+i = 0
+while(i <= 10):
+	if (i == 5):
+		i = i + 1
+		continue
+	print(i)
+	i = i + 1
+
+# example 3
+
+print("example 3")
+i = 0
+while(i <= 10):
+	if (i == 5):
+		pass # come to this later
+	elif (i == 10):
+		pass # fill in at a better time!
+	print(i)
+	i = i + 1
+
+print("all done!")
