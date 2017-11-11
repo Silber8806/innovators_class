@@ -132,13 +132,15 @@ You don't have to do any of this work in python.  You can do a lot of it from th
 
 We explore 3 commands that you can type in the commandline:
 
-cat - prints out the contents of a file to screen.
-wc - wordcount program.  You can provide it 3 options: -c, -w and -l for character, word and line counts.
-grep - does a find command over each line and returns those lines that have a match.
+	cat - prints out the contents of a file to screen.
+
+	wc - wordcount program.  You can provide it 3 options: -c, -w and -l for character, word and line counts.
+	
+	grep - does a find command over each line and returns those lines that have a match.
 
 In Bash, you can feed cat to wc using a pipe |.
 
-cat <filename> | wc -l
+	cat <filename> | wc -l
 
 will print all the lines of filename and forward them to the wc program, which does a line count.
 
