@@ -79,6 +79,7 @@ or long variable.  You must use only string variables to switch
 questions.  You must use the break keyword to get out.
 
 ## 10. create your own game and blog about it.  
-Make it as complex as you would like.  You can have 0 rules, 100 rules or anything in between.  You could have people select answers.
+Make it as complex as you would like.  You can have 0 rules, 100 rules or anything in between.  You could have people select answers.  A good one would be a old dungeon crawler game where you describe each
+room that you go into.
 
 
