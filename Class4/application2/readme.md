@@ -40,6 +40,18 @@ This also uses head and body.
 You can isolate the css or styles into the head section.  It 
 then applies to all eleemnts of a specific type.
 
+## index6.html
+
+The last example I copies from boostrap website.  It just shows you
+a more professional website.  If you run http://127.0.0.1/8000/index6.html
+you will see a very nice looking web template.  
+
+This is provided as an example at bootstrap main website, but adapted with files locally:
+
+https://v4-alpha.getbootstrap.com/examples/jumbotron/
+
+I would recommend using git pull to get the files...it is not meant as something to type.
+
 ## Conclusion.
 
 Web servers like SimpleHTTPServer create a connection with the internet and serve files from the local computer.
