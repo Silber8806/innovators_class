@@ -37,7 +37,7 @@ This also uses head and body.
 
 ## index5.html
 
-You can isolae the css or styles into the head section.  It 
+You can isolate the css or styles into the head section.  It 
 then applies to all eleemnts of a specific type.
 
 ## Conclusion.
@@ -58,5 +58,5 @@ and the web server provides a file called index.html (in file directory).
 The browser takes that file and interprets it.
 
 
-127.0.0.1:8000 i
+127.0.0.1:8000 
 
