@@ -1,0 +1,3 @@
+help(str)
+
+help(list)
