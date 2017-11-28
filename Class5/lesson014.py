@@ -1,26 +1,31 @@
-clients = {"Target": [1000,True], "Sears": [200, False],"Macy's":[250, True]}
+market_basket = {}
+
+market_basket["apple"] = 3
+market_basket["oranges"] = 1
+market_basket["cookies"] = "N/A"
+
+print("dictionary:")
+print(market_basket)
 
 print
-print("Check for key existence:")
-if(clients.has_key("Target")):
-	sales=clients["Target"][0]
-	repeat=clients["Target"][1]
-	if(repeat):
-		print("Target resell: %s" % sales)
+print("Decomposing keys, cookies and relationships!")
+print("Keys:")
+print(market_basket.keys())
+print("""
+***
+	Note: Keys have no order.
+	Calling market_basket.keys()
+	might change the order of values.
+***
+""") 
 
 print
-print("Check a bunch of keys...")
-opportunities=["Target","Sears","Walmart"]
-for opportunity in opportunities:
-	if opportunity not in clients.keys():
-		print("new client: %s" % opportunity)
-	else:
-		print("old client: %s" % opportunity)
+print("Values:")
+print(market_basket.values())
 
 print
-print("going through all relationships:")
-for client,data in clients.items():
-	if (data[0]<500 and client != "Sears"):
-		print("Less than $500 in sales")
-		print("Not special client Sears!")
-		print(client)
+print("Relationships:")
+print(market_basket.items())
+
+
+

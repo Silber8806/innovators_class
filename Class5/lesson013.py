@@ -1,31 +1,35 @@
-market_basket = {}
+# dictionary is a mapping of a key to a value.
 
-market_basket["apple"] = 3
-market_basket["oranges"] = 1
-market_basket["cookies"] = "N/A"
+oxford_dict = {"Hello":"an expression or gesture of greeting"}
 
-print("dictionary:")
-print(market_basket)
+print("This is a dictionary")
+print(oxford_dict)
 
 print
-print("Decomposing keys, cookies and relationships!")
-print("Keys:")
-print(market_basket.keys())
-print("""
-***
-	Note: Keys have no order.
-	Calling market_basket.keys()
-	might change the order of values.
-***
-""") 
+print("We can add new 'words' (keys) to it.")
+oxford_dict["World"] = "the earth with its inhabitants and all things upon it"
+print(oxford_dict)
 
 print
-print("Values:")
-print(market_basket.values())
+print("Dictionaries are unique key => value pairs")
+oxford_dict["World"] = 5
+print(oxford_dict)
 
 print
-print("Relationships:")
-print(market_basket.items())
+print("You can also see keys as custom indexes...")
+print(oxford_dict["World"])
 
+print
+print("You use dict[<key>] notation to retrieve values")
+print(oxford_dict["Hello"])
+
+print
+print("dictionaries can hold lists, dicts and other objects")
+oxford_dict["Countries"] = ["Germany","Canada","China","USA"]
+
+print("They are also mutable...")
+webster = oxford_dict
+oxford_dict["Hello"] = "AOL: Goodbye!"
+print(webster)
 
 

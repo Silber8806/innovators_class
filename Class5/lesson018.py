@@ -1,91 +1,46 @@
-print("This is a list comprehension")
+print("This is a set:")
 
-states = ["MA","RI","NH","NM"]
-state_dict = {"MA": "Massachusetts",
-			  "RI":"Rhode Island", 
-			  "NH":"New Hampshire", 
-			  "NM": "New Mexico"}
+universe = ["Earth", "Mars", "Moon", "Moon", "Moon"]
+
+print(universe)
+
+unique_universe = set(universe)
+print
+print("set is a unique set of keys.")
+print(unique_universe)
 
 print
-state_names = [state_dict[s] for s in states]
-print("Use the state dict to create a named list of states")
-print(state_names)
+print("We can add a member using add command:")
+unique_universe.add("Pluto")
+print(unique_universe)
 
 print
-print("This is a short cut for:")
-original_states = []
-for s in states:
-	original_states.append(state_dict[s])
-print(original_states)
+print("We can test for basic membership using in:")
+print("Pluto" in unique_universe)
 
 print
-print("You can filter a list (and dict) comprehension using if statement:")
-states_with_n = [state_dict[s] for s in states if s.startswith('N')]
-print(states_with_n)
+print("sets are used mostly for doing set operations")
+earth = set(["Earth"])
 
 print
-print("This is a shortcut for:")
-n_states = []
-for s in states:
-	if s.startswith("N"):
-		n_states.append(state_dict[s])
-print(n_states)
+print("Is earth a subset of the universe")
+print(unique_universe.issubset(earth))
 
 print
-print("we can pair up state abbre with state names using zip:")
-state_abbreviations = zip(state_names,states)
-print(state_abbreviations)
+print("Is the earth a superset of the universe")
+print(unique_universe.issuperset(earth))
 
 print
-print("This is a short cut for:")
-original_zip = []
-for indice in range(0,len(states)):
-	original_zip.append((state_names[indice],states[indice]))
-print(original_zip)
+print("what does earth and the universe have in common.")
+print(unique_universe.intersection(earth))
 
 print
-print("We can finally convert to dictionary using a comprehension")
-state_abbreviations_dict = { k:v for k,v in state_abbreviations}
-print(state_abbreviations_dict)
+print("What is the union of two systems:")
+print("Let's also discard Pluto beforehand....")
+mercury = set(["Mercury"])
+unique_universe.discard("Pluto")
+print(unique_universe.union(mercury))
 
 print
-print("This is a short-cut for:")
-original_dict = {}
-for k,v in state_abbreviations:
-	original_dict[k] = v
-print(original_dict)
-
-print
-print("We can do a filter on dictionary comprehensions as well:")
-n_shire_state_abbreviations_dict = { k:v for k,v in state_abbreviations if k.endswith("shire") and v.startswith("N")}
-print(n_shire_state_abbreviations_dict)
-
-print
-print("This is a short-cut for:")
-n_shires = {}
-for k,v in state_abbreviations:
-	if (k.endswith('shire') and v.startswith("N")):
-		n_shires[k] = v
-print(n_shires)
-
-print
-print(
-"""
-This case paris up all abbrevations with states.  It filters by 
-States that start with the same first letter abbreviation as first
-letter in their name.
-""")
-possible_states = [[abbrev,state] for abbrev in state_names for state in states if abbrev[0] == state[0]]
-print(possible_states)
-
-print
-print("this is short for:")
-wow = []
-for abbrev in state_names:
-	for state in states:
-		if (state[0] == abbrev[0]):
-			wow.append([abbrev,state])
-print(wow)
-
-
-
+print("What are not shared between earth and mercury")
+print(earth.symmetric_difference(mercury))

@@ -1,45 +1,26 @@
-customers = {"Johny Walker": True}
+clients = {"Target": [1000,True], "Sears": [200, False],"Macy's":[250, True]}
 
-todays_customers = ["Johny Walker", "Sarah Walker"]
+print
+print("Check for key existence:")
+if(clients.has_key("Target")):
+	sales=clients["Target"][0]
+	repeat=clients["Target"][1]
+	if(repeat):
+		print("Target resell: %s" % sales)
 
-print("Insert non-existent keys only!")
-for customer in todays_customers:
-	if (customers.has_key(customer)):
-		pass
+print
+print("Check a bunch of keys...")
+opportunities=["Target","Sears","Walmart"]
+for opportunity in opportunities:
+	if opportunity not in clients.keys():
+		print("new client: %s" % opportunity)
 	else:
-		customers[customer] = True
-print(customers)
-
-
-customers = {"Johny Walker": True}
+		print("old client: %s" % opportunity)
 
 print
-print("provide a default value for non-existent keys")
-for customer in todays_customers:
-	if (customers.get(customer,"N/A") == "N/A"):
-		print(customer)
-
-region = {}
-region["USA"] = {"States":[]}
-region["EU"] = {"Countries":[]}
-region["USA"]["States"].extend(["MA","RI"])
-region["EU"]["Countries"].extend(["Germany","France","England"])
-
-print
-print("A more complex example:")
-print(region)
-
-print
-print("iterate over USA States:")
-for state in region["USA"]["States"]:
-	print(state)
-
-print
-print("iterate over EU countries")
-for country in region["EU"]["Countries"]:
-	print(country)
-
-print
-print("iterate over states + countries")
-for subregion in region["USA"]["States"] + region["EU"]["Countries"]:
-	print(subregion)
+print("going through all relationships:")
+for client,data in clients.items():
+	if (data[0]<500 and client != "Sears"):
+		print("Less than $500 in sales")
+		print("Not special client Sears!")
+		print(client)

@@ -1,44 +1,33 @@
-print("This is a set:")
-
-universe = ["Earth", "Mars", "Moon", "Moon", "Moon"]
-
-print(universe)
-
-unique_universe = set(universe)
 print
-print("set is a unique set of keys.")
-print(unique_universe)
+print("Testing for errors")
 
-print
-print("We can add a member using add command:")
-unique_universe.add("Pluto")
-print(unique_universe)
+no_keys = {}
 
-print
-print("We can test for basic membership using in:")
-print("Pluto" in unique_universe)
+keys_to_try = ["Me","You"]
 
-print
-print("sets are used mostly for doing set operations")
-earth = set(["Earth"])
+print(
+"""
+	try tests code block.
+	If it errors, it executes
+	the except block.
+""")
 
-print
-print("Is earth a subset of the universe")
-print(unique_universe.issubset(earth))
+for k in keys_to_try:
+	try:
+		no_keys[k]
+	except:
+		no_keys[k] = True
+
+print("The result is:")
+print(no_keys)
 
 print
-print("Is the earth a superset of the universe")
-print(unique_universe.issuperset(earth))
+print("try should rarely be used.")
+print("It can cover up unintentional errors.")
 
-print
-print("what does earth and the universe have in common.")
-print(unique_universe.intersection(earth))
 
-print
-print("What is the union of two systems:")
-mercury = set(["Mercury"])
-print(unique_universe.union(mercury))
+del no_keys["Me"]
+del no_keys["You"]
 
-print
-print("What are not shared between earth and mercury")
-print(earth.symmetric_difference(mercury))
+print("You can delete a key using del keyword")
+print(no_keys)
