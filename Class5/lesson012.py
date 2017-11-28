@@ -1,35 +1,21 @@
-# dictionary is a mapping of a key to a value.
+print("What is a tuple:")
+customer_info = ("John","Smith","United States",25)
 
-oxford_dict = {"Hello":"an expression or gesture of greeting"}
-
-print("This is a dictionary")
-print(oxford_dict)
-
-print
-print("We can add new 'words' (keys) to it.")
-oxford_dict["World"] = "the earth with its inhabitants and all things upon it"
-print(oxford_dict)
+print("Tuples are like lists, but you can't modify them:")
+print("indexing:")
+print(customer_info[0])
+print(customer_info[0:1])
 
 print
-print("Dictionaries are unique key => value pairs")
-oxford_dict["World"] = 5
-print(oxford_dict)
+print("for loop:")
+for tup in customer_info:
+	print("info: %s" % tup)
 
-print
-print("You can also see keys as custom indexes...")
-print(oxford_dict["World"])
-
-print
-print("You use dict[<key>] notation to retrieve values")
-print(oxford_dict["Hello"])
-
-print
-print("dictionaries can hold lists, dicts and other objects")
-oxford_dict["Countries"] = ["Germany","Canada","China","USA"]
-
-print("They are also mutable...")
-webster = oxford_dict
-oxford_dict["Hello"] = "AOL: Goodbye!"
-print(webster)
-
+print("It fails on any command below:")
+customer_info[0] = "Judy"
+customer_info.insert(1,1)
+customer_info.remove("United States")
+print(customer_info.pop())
+customer_info.sort()
+customer_info.reverse()
 

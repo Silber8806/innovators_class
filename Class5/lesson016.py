@@ -1,33 +1,45 @@
-print
-print("Testing for errors")
+customers = {"Johny Walker": True}
 
-no_keys = {}
+todays_customers = ["Johny Walker", "Sarah Walker"]
 
-keys_to_try = ["Me","You"]
+print("Insert non-existent keys only!")
+for customer in todays_customers:
+	if (customers.has_key(customer)):
+		pass
+	else:
+		customers[customer] = True
+print(customers)
 
-print(
-"""
-	try tests code block.
-	If it errors, it executes
-	the except block.
-""")
 
-for k in keys_to_try:
-	try:
-		no_keys[k]
-	except:
-		no_keys[k] = True
-
-print("The result is:")
-print(no_keys)
+customers = {"Johny Walker": True}
 
 print
-print("try should rarely be used.")
-print("It can cover up unintentional errors.")
+print("provide a default value for non-existent keys")
+for customer in todays_customers:
+	if (customers.get(customer,"N/A") == "N/A"):
+		print(customer)
 
+region = {}
+region["USA"] = {"States":[]}
+region["EU"] = {"Countries":[]}
+region["USA"]["States"].extend(["MA","RI"])
+region["EU"]["Countries"].extend(["Germany","France","England"])
 
-del no_keys["Me"]
-del no_keys["You"]
+print
+print("A more complex example:")
+print(region)
 
-print("You can delete a key using del keyword")
-print(no_keys)
+print
+print("iterate over USA States:")
+for state in region["USA"]["States"]:
+	print(state)
+
+print
+print("iterate over EU countries")
+for country in region["EU"]["Countries"]:
+	print(country)
+
+print
+print("iterate over states + countries")
+for subregion in region["USA"]["States"] + region["EU"]["Countries"]:
+	print(subregion)
