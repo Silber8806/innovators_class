@@ -23,7 +23,11 @@ print(original_dict)
 
 print
 print("We can do a filter on dictionary comprehensions as well:")
-n_shire_state_abbreviations_dict = { k:v for k,v in state_abbreviations if k.endswith("shire") and v.startswith("N")}
+n_shire_state_abbreviations_dict = { k:v for k,v in 
+									state_abbreviations 
+									if k.endswith("shire") 
+									and v.startswith("N")}
+
 print(n_shire_state_abbreviations_dict)
 
 print

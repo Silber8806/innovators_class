@@ -16,7 +16,9 @@ This case paris up all abbrevations with states.  It filters by
 States that start with the same first letter abbreviation as first
 letter in their name.
 """)
-possible_states = [[abbrev,state] for abbrev in state_names for state in states if abbrev[0] == state[0]]
+possible_states = [[abbrev,state] for abbrev in 
+					state_names for state in states 
+					if abbrev[0] == state[0]]
 print(possible_states)
 
 print
