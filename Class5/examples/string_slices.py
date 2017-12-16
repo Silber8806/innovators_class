@@ -1,6 +1,7 @@
 # Author: Marissa Fisher
 
 garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+print(len(garbled))
 message1 = garbled[::-2]
 print message1
 
