@@ -2,6 +2,10 @@
 
 ## Application 1: Manipulating JSON 
 
+Load JSON file into data, look at the metadata and data.  Then create a subset of the JSON file and serve it using
+SimpleHTTPServer.  Then use requests, a HTTP request library, to retrieve it from the webserver and present it 
+back to the screen.
+
 https://www.healthdata.gov/dataset/nchs-leading-causes-death-united-states/resource/f9f2da22-cfc2-4394-90d8-9ea4f70e9740
 
 ## Application 2: Impatient care data set
