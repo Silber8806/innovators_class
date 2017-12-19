@@ -165,3 +165,48 @@ for row in cancer_table:
 
 print("Let's see the cancer rate by table:")
 raw_input("continue...")
+
+cancer_table.append([1998,500000,2500000,20.00])
+cancer_table.append([2018,600000,2700000,22.22])
+json.dumps(cancer_table,indent=4)
+
+cancer_table.sort(key=lambda x: x[0])
+
+print
+print ("year,cancer,total,percent".split(","))
+for row in cancer_table:
+	print(row)
+
+print("Let's add a 2 rows to the cancer table...")
+raw_input("continue...")
+
+tree_top = {}
+tree_top["yearly"] = {}
+tree_top["yearly"]["data"] = cancer_table
+
+print(json.dumps(tree_top, indent=4))
+
+print("Let's make our own json...")
+raw_input("continue...")
+
+meta = ["year","cancer_death","total_death","percent"]
+tree_top["yearly"]["meta"] = meta
+
+print(json.dumps(tree_top, indent=4))
+
+print("We can make our own meta data too!")
+raw_input("continue...")
+
+to_json = open('cancer.json','w')
+to_json.write(json.dumps(tree_top, indent=4))
+to_json.close()
+
+from_json = open('cancer.json','r')
+json_contents = from_json.read()
+print(json_contents)
+
+print("Let's write to a file and then open it!")
+raw_input("continue...")
+
+
+
