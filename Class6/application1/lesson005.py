@@ -1,13 +1,80 @@
-print("Going through the data structure....")
-
 import json
 
 json_file = 'death.data'
 contents = open(json_file,'r').read()
 json_data = json.loads(contents)
 columns = json_data['meta']['view']['columns'] 
-column_names = [col['name'] for col in columns]
+
 data_columns={col["name"]:col for col in columns if col.has_key("tableColumnId")}
+
+for k,v in data_columns.iteritems():
+	print
+	print(k,v)
+	print
+
+prompt = """
+I use a shortcut to recreate the data from lesson004.py.  A dictionary of columns
+with their associated properties in JSON format.
+"""
+
+raw_input(prompt)
+
+
+print(type(json_data['data']))
+
+prompt = """
+Alright, let's look at the data object by
+checking it's root level!
+
+It seems to be a list of data points, which
+would make it easy to traverse!
+"""
+
+raw_input(prompt)
+
+print(json_data['data'][0])
+
+prompt = """
+Let's look at a single data point!
+"""
+
+raw_input(prompt)
+
+print(set([len(datum) for datum in json_data['data']]))
+prompt = """
+If it has the same number of columns for each data 
+point, then I can access everything through a single 
+index.
+
+Here I test if the lengths vary by data point!
+
+In this case, they all have the same length.
+"""
+
+raw_input(prompt)
+
+print(len(columns))
+prompt = """
+Does it match with the metadata column length?
+
+It does, it's probably a one-to-one match!
+"""
+
+raw_input(prompt)
+
+column_names = [col['name'] for col in columns]
+data_point = json_data['data'][0]
+print(zip(column_names,data_point))
+prompt = """
+We can match up the column name from our metadata
+analysis with the single data point.
+
+Do the columns make sense relative to the data?
+
+I think so!
+"""
+
+raw_input(prompt)
 
 data = {}
 for d in json_data['data']:
@@ -16,197 +83,70 @@ for d in json_data['data']:
 		default_key.extend([v])
 		data[k] = default_key
 
+print(data)
+prompt = """
+We can get a list of all values in a column by
+adding it to a dictionary of lists!
+"""
+
+raw_input(prompt)
+
+print(data.keys())
+years = list(set(data['Year']))
+years.sort()
 print
-print("We start with data, data_columns from previous examples")
-raw_input("continue...")
-
-for indice, col in zip(range(0,len(column_names)),column_names):
-	print(indice, col)
-
-for d in json_data['data'][0:51]:
-	print(d[8:])
-
+print("year data...")
+for year in years:
+	print(year)
 print
-print("Let's look at the first 50 columns...")
-raw_input("continue...")
 
-data = {}
-for d in json_data['data']:
-	for k,v in zip(column_names[8:],d[8:]):
-		default_key = data.get(k,[])
-		default_key.extend([v])
-		data[k] = default_key
+prompt = """
+We can get a list of years by looking up the
+Year in our new dictionary.  We use set to 
+create a unique set.
 
-print
-print("Take only the 6 and further columns for data....")
-raw_input("continue...")
+We convert it to a list so that we can sort it
+making it easier to interpret for people!
+"""
 
-unique_values = {k:list(set(v)) for k,v in data.iteritems()}
+raw_input(prompt)
 
-for k,v in unique_values.iteritems():
-	print(k, len(v))
-
-print("What's the unique count of each type of item?")
-raw_input("continue...")
-
-for k,v in unique_values.iteritems():
-	if len(v) < 100:
-		print
-		print("*****************")
-		print("*.   " + k )
-		print("*****************")
-		v.sort()
-		for l in v:
-			print l
-		print
+year_counts = {}
+for year in data['Year']:
+	if year_counts.has_key(year):
+		year_counts[year] += 1
+	else:
+		year_counts[year] = 1
 
 
-print("Let's look at those with only 100 or less unique values...?")
-print("Anything more is most likely a number....")
-raw_input("continue...")
+for year, cnt in year_counts.iteritems():
+	print(year,cnt)
 
-print
-print("Let's define some filters....")
+prompt = """
+The last example uses a dictionary to count
+the number of records per year!
+"""
 
-print
-print("State:")
-print("United States")
+raw_input(prompt)
 
-print
-print("Cause Name:")
-print("All Causes")
+print(len(data['Year']))
+print(sum(year_counts.values()))
+print(len(data['Year']) == sum(year_counts.values()))
 
-print
-print("Year:")
-print("2015")
+prompt = """
+We can get the number of records in years to get 
+the total number of data points!
 
-print
-for d in json_data['data']:
-	row = d[8:]
-	year, cause, state, deaths = row[0],row[2],row[3], row[-2]
-	if (year == "2015" and cause == "All Causes" and state == "United States"):
-		print("How many deaths in total in the US:")
-		print(deaths)
+We can then use the dict.values() method to retrieve 
+the counts by year and sum them.
 
-print("Let's see what we get!")
-raw_input("continue...")
+Are they the same value?
 
-print
-print("Let's define some filters....")
+Yes!
 
-print
-print("State:")
-print("United States")
+It's always worth doing these little sanity tests!
+"""
 
-print
-print("Cause Name:")
-print("All Causes")
-
-print
-print("By Year:")
-total = 0
-for d in json_data['data']:
-	row = d[8:]
-	year, cause, state, deaths = row[0], row[2],row[3], row[-2]
-	if (cause == "All Causes" and state == "United States"):
-		print(str(year) + ": " +  str(deaths))
-		total += int(deaths)
-
-print
-print("Yearly summaries:")
-print("Total above for 17 years is: %s" % total)
-print("Average is: " + str(total/17))
-raw_input("continue...")
-
-
-print
-year_total_deaths={}
-cancer_total_deaths={}
-for d in json_data['data']:
-	row = d[8:]
-	year, cause, state, deaths = row[0], row[2],row[3], row[-2]
-	if (cause == "All Causes" and state == "United States"):
-		year_total_deaths[year] = deaths
-	if (cause == "Cancer" and state == "United States"):
-		cancer_total_deaths[year] = deaths
-
-print("year totals by year:")
-print(year_total_deaths)
-print("cancer totals by year:")
-print(cancer_total_deaths)
-raw_input("continue...")
-
-unique_years = set(year_total_deaths.keys())
-unique_cancers = set(cancer_total_deaths.keys())
-
-print
-if(len(unique_cancers.symmetric_difference(unique_years)) == 0):
-	print("No")
-else:
-	print("Yes")
-
-print("Are there any years missing?")
-raw_input("continue...")
-
-cancer_table = []
-for year in unique_years:
-	total_death = year_total_deaths[year]
-	cancer_death = cancer_total_deaths[year]
-	year, cancer_death, total_death= int(year), int(cancer_death), int(total_death)
-	cancer_rate = round(100 * cancer_death / float(total_death),2)
-	cancer_table.append([year, cancer_death,total_death,cancer_rate])
-
-cancer_table.sort(key=lambda x: x[0])
-
-print
-print ("year,cancer,total,percent".split(","))
-for row in cancer_table:
-	print(row)
-
-print("Let's see the cancer rate by table:")
-raw_input("continue...")
-
-cancer_table.append([1998,500000,2500000,20.00])
-cancer_table.append([2018,600000,2700000,22.22])
-json.dumps(cancer_table,indent=4)
-
-cancer_table.sort(key=lambda x: x[0])
-
-print
-print ("year,cancer,total,percent".split(","))
-for row in cancer_table:
-	print(row)
-
-print("Let's add a 2 rows to the cancer table...")
-raw_input("continue...")
-
-tree_top = {}
-tree_top["yearly"] = {}
-tree_top["yearly"]["data"] = cancer_table
-
-print(json.dumps(tree_top, indent=4))
-
-print("Let's make our own json...")
-raw_input("continue...")
-
-meta = ["year","cancer_death","total_death","percent"]
-tree_top["yearly"]["meta"] = meta
-
-print(json.dumps(tree_top, indent=4))
-
-print("We can make our own meta data too!")
-raw_input("continue...")
-
-to_json = open('cancer.json','w')
-to_json.write(json.dumps(tree_top, indent=4))
-to_json.close()
-
-from_json = open('cancer.json','r')
-json_contents = from_json.read()
-print(json_contents)
-
-print("Let's write to a file and then open it!")
-raw_input("continue...")
-
+raw_input(prompt)
 
 

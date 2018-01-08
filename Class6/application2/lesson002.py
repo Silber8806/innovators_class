@@ -1,65 +1,46 @@
 import csv
+import sqlite3
 
-csv_file =  'impatient_payments.csv'
+conn = sqlite3.connect('heartattack.db')
 
-with open(csv_file,'rb') as csv_file:
-	impatient_dict = csv.DictReader(csv_file,delimiter=",", quotechar='"')
-	data = []
-	for row in impatient_dict:
-		data.append(row)
+c = conn.cursor()
 
-print
-print(data[0].keys())
-print("This is the header dictionary version")
-raw_input("continue...")
+c.execute(""" drop table if exists heartattacks;""")
 
-print
-for row in data:
-	print(row)
-print("This is the data dictionary version")
-raw_input("continue")
+# Create table
+c.execute(
+			"""
+			CREATE TABLE heartattacks
+			(
+				Year text,
+				LocationAbbr text,
+				LocationDesc text,
+				GeographicLevel text,
+				DataSource text,
+				Class text,
+				Topic text,
+				Data_Value text,
+				Data_Value_Unit text,
+				Data_Value_Type text,
+				Data_Value_Footnote_Symbol text,
+				Data_Value_Footnote text,
+				StratificationCategory1 text,
+				Stratification1 text,
+				StratificationCategory2 text,
+				Stratification2 text,
+				TopicID text,
+				LocationID text,
+				Location_1 text
+			)
+			"""
+          )
 
-zipcode_key = 'Provider Zip Code'
-total_pay_key = ' Average Total Payments '
+with open('heartattacks.csv','rb') as f:
+	reader = csv.reader(f)
+	for row in reader:
+		c.execute("INSERT INTO heartattacks VALUES (" + ",".join(['"' + col + '"' for col in row ]) + ")")
 
-max_pay_by_zip = {}
-
-print
-for row in data:
-	zipcode = row[zipcode_key]
-	total_pay = float(row[total_pay_key].replace("$",""))
-	if (max_pay_by_zip.has_key(zipcode)):
-		current_pay = max_pay_by_zip[zipcode]
-		if (total_pay > current_pay):
-			max_pay_by_zip[zipcode] =  total_pay
-	else:
-		max_pay_by_zip[zipcode] = total_pay
-
-print(("zipcode,total cost"))
-for zipcd in sorted(max_pay_by_zip.iteritems()):
-	print(zipcd)
-
-print("Here are the max values present for each zipcode")
-raw_input("continue")
-
-min_pay_by_zip = {}
-
-print
-for row in data:
-	zipcode = row[zipcode_key]
-	total_pay = float(row[total_pay_key].replace("$",""))
-	if (min_pay_by_zip.has_key(zipcode)):
-		current_pay = min_pay_by_zip[zipcode]
-		if (total_pay < current_pay):
-			min_pay_by_zip[zipcode] =  total_pay
-	else:
-		min_pay_by_zip[zipcode] = total_pay
-
-print(("zipcode,total cost"))
-for zipcd in sorted(min_pay_by_zip.iteritems()):
-	print(zipcd)
-
-print("Changing a few signs, we can get minimums")
-raw_input("continue")
+conn.commit()
+conn.close()
 
 
