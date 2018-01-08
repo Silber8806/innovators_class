@@ -1,92 +1,88 @@
-print("Finding the column metadata...")
-
 import json
 
 json_file = 'death.data'
-
-print("reading contents")
 contents = open(json_file,'r').read()
+
+prompt = """
+Borrow code from lesson002.py.  Read the contents
+of the JSON file into the content variable.
+"""
+
+raw_input(prompt)
+
 json_data = json.loads(contents)
 
-print(json.dumps(json_data['meta'],indent=4))
+print(json_data)
+
+prompt = """
+Python can treat a json file as 
+a set of dictionaries and lists.
+To do so, you have to first import
+the json library:
+
+	import json
+
+then you can use:
+
+	json.loads(<json_string_data>)
+
+to turn the JSON string into python
+dictionaries and lists.  
+
+The downside of json.loads is that
+it becomes harder to read when 
+printed!  See above!
+"""
+
+raw_input(prompt)
+
+print(type(json_data))
+
+prompt = """
+json.loads returns either a 
+dictionary or list.  We use
+print(type(json_data)).
+
+In this case, json_data is 
+a dictionary!
+"""
+
+raw_input(prompt)
+
+print(json_data.keys())
+
+prompt = """
+A dictionary has keys!  In this 
+case it is meta and data.  In 
+data community, meta typically 
+refers to metadata.  data refers
+to ... data.  
+
+Press ENTER to learn more about the
+terms: 
+...
+"""
+
+raw_input(prompt)
+
 print
-print("Let's look at the metadata above!")
+print(
+	"""
+	metadata is data about the data.
+	you can think about it as the header
+	of a CSV file. 
+	""")
+
 raw_input("Continue...")
 
-meta = json_data['meta']
-print(meta.keys())
 print
-print("meta keys:")
+print(
+	"""
+	data is the actual data.  Note this data is
+	present with limited information about it.  
+	Use the metadata to understand what the data
+	is about!
+	"""
+	)
+
 raw_input("Continue...")
-
-print(meta['view'].keys())
-print
-print("meta.view keys")
-raw_input("Continue...")
-
-print(json.dumps(meta['view']['columns'],indent=4))
-print
-print("meta.view.columns -> probably the columns!")
-raw_input("Continue...")
-
-columns = meta['view']['columns']
-
-for col in columns:
-	print
-	print(col)
-	print
-
-print
-print("Looking at this data, I see hidden flags")
-raw_input("Continue...")
-
-for col in columns:
-	if col.has_key("tableColumnId"):
-		print
-		print(col['name'])
-		print
-		print(col)
-		print
-
-print("Looking at this data, I see hidden flags")
-print("tableColumnId seems to be legit data...")
-raw_input("Continue...")
-
-for col in columns:
-	if col.has_key("tableColumnId"):
-		if col['name'] == "Deaths":
-			print(json.dumps(col,indent=4))
-
-print("This is a single column and all associated data...")
-print("The cached contents looks interesting...it gives...")
-print("averages,small and large values...")
-raw_input("Continue....")
-
-data_columns = []
-for col in columns:
-	if col.has_key("tableColumnId"):
-		data_columns.append(col["name"])
-
-print(data_columns)
-print
-print("Let's get a list of all columns...")
-raw_input("Continue....")
-
-data_columns = {}
-for col in columns:
-	if col.has_key("tableColumnId"):
-		data_columns[col["name"]]=col
-
-print(data_columns)
-print
-print("Maybe a dictionary of columns would be more userful")
-raw_input("Continue...")
-
-for col in data_columns.keys():
-	print(col)
-print
-print("Now we can get the columns on demand...")
-raw_input("Continue...")
-
-
-

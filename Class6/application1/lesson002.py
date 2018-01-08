@@ -1,49 +1,79 @@
-print("How do you navigate a JSON file?")
+prompt = """
+JAVASCRIPT OBJECT NOTATION.
+
+JSON can be thought of as a hierarchial set 
+of lists and dictionaries.
+
+Example:
+
+[
+	"first name":"Chris",
+	"last name": "Kottmyer",
+	"Hobbies : [
+		"Reading",
+		"Writing",
+		"Sleeping",
+		"Coding"
+	]
+]
+
+JSON can be very complex.
+
+The example above could be part of my Facebook profile.
+We could even add posts to the JSON object!
+
+[
+	"first name":"Chris",
+	"last name": "Kottmyer",
+	"Hobbies : [
+		"Reading",
+		"Writing",
+		"Sleeping",
+		"Coding"
+	],
+	posts : [
+			{
+				"header" : "Learn Python",
+				"body": "I am learning Python today!",
+				"images": [
+					1,2,3
+				]
+			},
+			{
+				"header" : "Learn Python 2 ",
+				"body" : "I am learning Python tomorrow!",
+				"images" : [
+					4,5,6
+				]
+			}
+	]
+]
+
+JSON can be deeply nested representing attributes and collections
+of objects.
+
+This naturely translates to dictionaries and lists in python!
+"""
+
+raw_input(prompt)
 
 import json
 
 json_file = 'death.data'
 
-print("reading contents")
-contents = open(json_file,'r').read()
-json_data = json.loads(contents)
+print("Contents of File:")
+print(open(json_file,'r').read())
 
-print(json_data)
-print
-print("We now have a JSON loaded as dictionaries and lists")
+prompt = """
+The first step in manipulating a JSON file is to open it as
+a regular file and read it's content as a string.
 
-raw_input("Continue...")
+At this stage, you should look at the structure of the data
+and try to find patterns that you can later exploit!
 
-print
-print("Check the first type:")
-print(type(json_data))
+Later on, we will convert the string to a set of dictionaries
+and lists using the json library!
+"""
 
-raw_input("Continue...")
+raw_input(prompt)
 
-print
-print("Dictionaries have keys")
-print(json_data.keys())
-
-raw_input("Continue...")
-
-print
-print(
-	"""
-	metadata is data about the data.
-	you can think about it as the header
-	of a CSV file. 
-	""")
-
-raw_input("Continue...")
-
-print
-print(
-	"""
-	data is the actual data.  Note this data is
-	present with limited information about it.  
-	Use the metadata to understand what the data
-	is about!
-	"""
-	)
-
-raw_input("Continue...")
