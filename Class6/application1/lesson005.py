@@ -23,11 +23,13 @@ raw_input(prompt)
 print(type(json_data['data']))
 
 prompt = """
-Alright, let's look at the data object by
-checking it's root level!
+After looking at metadata, we should have some idea about the columns in the data
+set.  We also prepared the 'data columns' dictionary for looking up information
+and adding formatting to later data outputs.
 
-It seems to be a list of data points, which
-would make it easy to traverse!
+The next thing we should do is dig into the 'data' key at the root-level!  When
+checking the type this time, we find that it is a <list> type.  Often, large 
+collections of objects like data points are stored in list format.
 """
 
 raw_input(prompt)
@@ -35,29 +37,38 @@ raw_input(prompt)
 print(json_data['data'][0])
 
 prompt = """
-Let's look at a single data point!
+When we have a list as root: json_data['data'], it is often worth looking at 
+a single data point.  We can do this using:
+
+json_data['data'][0]
+
+Looking at the data point, we can start making some assumptions about the remaining
+items.  In this case, it seems that all data points are stored within the 
+json_data['data'] key. I now test my assumption!
 """
 
 raw_input(prompt)
 
 print(set([len(datum) for datum in json_data['data']]))
 prompt = """
-If it has the same number of columns for each data 
-point, then I can access everything through a single 
-index.
-
-Here I test if the lengths vary by data point!
-
-In this case, they all have the same length.
+A common 'sanity' test is to count all the columns of each row.  To do this, we 
+first loop through each member of the json_data['data'] collection and take it's
+len.  We than use the 'set' command to see if there are different numbers of 
+columns for any of the points.  If we find multiple numbers in the set,
+we might want to explore a few data points with different column lengths to 
+see how they differ.  In this case, all the data points have the same column
+length.  It's possible that only data points are stored under json_data['data'].
 """
 
 raw_input(prompt)
 
 print(len(columns))
 prompt = """
-Does it match with the metadata column length?
-
-It does, it's probably a one-to-one match!
+If json_data['data'] is only data points, a good second 'sanity' test would be 
+to count the number of columns in 'meta' and compare it with the columns within
+these data points.  If they are the same, there is a good change that the 
+'meta' data describes the columns within 'data'.  We take the length of 'meta'
+data columns.  It is the same.  
 """
 
 raw_input(prompt)
@@ -66,12 +77,11 @@ column_names = [col['name'] for col in columns]
 data_point = json_data['data'][0]
 print(zip(column_names,data_point))
 prompt = """
-We can match up the column name from our metadata
-analysis with the single data point.
-
-Do the columns make sense relative to the data?
-
-I think so!
+Having confirmed that the data points have 14 columns and the metadata shows
+14 column descriptions, it's worth testing the assumption that both are in
+order.  That is to say, the first column in meta is the 0th index of the data
+point.  The second column is the 1st index of the data point.  We can do this
+with the zip command.
 """
 
 raw_input(prompt)
@@ -85,8 +95,13 @@ for d in json_data['data']:
 
 print(data)
 prompt = """
-We can get a list of all values in a column by
-adding it to a dictionary of lists!
+We've now confirmed that the data points are all most likely under json_data['data'].
+I decide to explore each column for unique values.  To do this, I create a dictionary
+called data.  I use the column names from the meta_data as the key.  I use the columns
+of the data points to populate a list (associated with the key).
+
+Once this is done, the data "dictionary" will contain a key for each column and all
+the values within each column.
 """
 
 raw_input(prompt)
@@ -101,12 +116,10 @@ for year in years:
 print
 
 prompt = """
-We can get a list of years by looking up the
-Year in our new dictionary.  We use set to 
-create a unique set.
-
-We convert it to a list so that we can sort it
-making it easier to interpret for people!
+We can now retrieve the entire "Year" column using data['Year'].  If we
+wanted to list all years in ascending order, we can retrieve all years,
+use a set to remove duplicates, convert it back to a list and then sort it.
+This is what happens in the above code!
 """
 
 raw_input(prompt)
@@ -119,12 +132,19 @@ for year in data['Year']:
 		year_counts[year] = 1
 
 
-for year, cnt in year_counts.iteritems():
+for year, cnt in sorted(year_counts.iteritems()):
 	print(year,cnt)
 
 prompt = """
-The last example uses a dictionary to count
-the number of records per year!
+Let's say we wanted to know the actual count of each year.  We can use a 
+dictionary called year_counts.  year_counts[<year>] starts at 1 when it
+first encounters <year>.  It then increments by 1 for each subsequent
+encounter.
+
+We print a sorted version of year counts after tallying the counts.  
+This works, because <dict>.iteritems() produces a list of tuples.
+By default, if year is the key (year, count), it shows up first
+and is the first thing to be sorted.
 """
 
 raw_input(prompt)
@@ -134,17 +154,9 @@ print(sum(year_counts.values()))
 print(len(data['Year']) == sum(year_counts.values()))
 
 prompt = """
-We can get the number of records in years to get 
-the total number of data points!
-
-We can then use the dict.values() method to retrieve 
-the counts by year and sum them.
-
-Are they the same value?
-
-Yes!
-
-It's always worth doing these little sanity tests!
+We can do one last sanity check.  The sum of the yearly counts. Should
+be the same as the number of entries in a column.  In this case, 
+it is true!
 """
 
 raw_input(prompt)
