@@ -16,9 +16,15 @@ for d in json_data['data']:
 		default_key.extend([v])
 		data[k] = default_key
 
-print
-print("We start with data, data_columns from previous examples")
-raw_input("continue...")
+prompt = """
+Let's re-use the previous analysis by re-producing both data_columns and data.
+data_columns brings in metadata information.  Data brings in the column-based 
+version of the data.  We can still loop through json_data['data'] if we want to
+access rows.
+"""
+
+raw_input(prompt)
+
 
 for indice, col in zip(range(0,len(column_names)),column_names):
 	print(indice, col)
@@ -26,9 +32,13 @@ for indice, col in zip(range(0,len(column_names)),column_names):
 for d in json_data['data'][0:51]:
 	print(d[8:])
 
-print
-print("Let's look at the first 50 columns...")
-raw_input("continue...")
+prompt = """
+Before we get deeper into the analysis, we should have a quick overview of the data.
+A quick way of accomplishing this is to print the columns (with their positional number)
+and 50 or so rows (data points).  We can start making conjecture this way!
+"""
+
+raw_input(prompt)
 
 data = {}
 for d in json_data['data']:
@@ -37,17 +47,28 @@ for d in json_data['data']:
 		default_key.extend([v])
 		data[k] = default_key
 
-print
-print("Take only the 6 and further columns for data....")
-raw_input("continue...")
+prompt = """
+Based on the previous overview, we realize that the first 8 columns are not useful.
+We decide to limit the data to the last 6 columns for further analysis (conveniently
+stored in data).
+"""
+
+raw_input(prompt)
 
 unique_values = {k:list(set(v)) for k,v in data.iteritems()}
 
 for k,v in unique_values.iteritems():
 	print(k, len(v))
 
-print("What's the unique count of each type of item?")
-raw_input("continue...")
+prompt = """
+Another technique we can use to get a sense of the data is to go through each column
+and list how many unique set of values exist.  Typically data can be divided into
+two categories: descriptions and metrics.  Descriptions are "human" categorization
+of data.  An example would be states (50 categories).  Metrics on the other hand
+are based on measurements or actual counts.  The variation should be larger!
+"""
+
+raw_input(prompt)
 
 for k,v in unique_values.iteritems():
 	if len(v) < 100:
@@ -61,12 +82,15 @@ for k,v in unique_values.iteritems():
 		print
 
 
-print("Let's look at those with only 100 or less unique values...?")
-print("Anything more is most likely a number....")
-raw_input("continue...")
+prompt = """
+Let's look at columns with less than 100 unique values.  These are most likely categories.
+They also fit the screen better and can be seen at a glance.
+"""
+
+raw_input(prompt)
 
 print
-print("Let's define some filters....")
+print("Let's pick 3 valeus for State, Cause and Year....")
 
 print
 print("State:")
@@ -88,7 +112,7 @@ for d in json_data['data']:
 		print("How many deaths in total in the US:")
 		print(deaths)
 
-print("Let's see what we get!")
+print("We can also analyze this by year!")
 raw_input("continue...")
 
 print
@@ -134,7 +158,23 @@ print("year totals by year:")
 print(year_total_deaths)
 print("cancer totals by year:")
 print(cancer_total_deaths)
-raw_input("continue...")
+print
+
+prompt = """
+Let's do something a bit more interesting!  Wouldn't it be cool
+to find out what percent of deaths are cancer related!
+
+To do this, we first need to get the total deaths by year.
+
+Then, we need to get total cancer deaths by years.
+
+We can than divide: "cancer deaths" / "total deaths"
+
+Before we can do that, we need to test some assumptions!
+
+"""
+
+raw_input(prompt)
 
 unique_years = set(year_total_deaths.keys())
 unique_cancers = set(cancer_total_deaths.keys())
@@ -145,8 +185,15 @@ if(len(unique_cancers.symmetric_difference(unique_years)) == 0):
 else:
 	print("Yes")
 
-print("Are there any years missing?")
-raw_input("continue...")
+prompt = """
+We need to make sure that every year in death totals has a data
+point in cancer deaths.  If one of the years is missing, we 
+will have to handle the "bad" data.  Luckily, the data is complete.
+Every year is present in both total deaths and cancer deaths!
+"""
+
+raw_input(prompt)
+
 
 cancer_table = []
 for year in unique_years:
@@ -163,8 +210,19 @@ print ("year,cancer,total,percent".split(","))
 for row in cancer_table:
 	print(row)
 
-print("Let's see the cancer rate by table:")
-raw_input("continue...")
+prompt = """
+We finally produce summarized output for cancer death rates.
+The final "table" called cancer table has 4 columns:
+
+year
+total deaths
+cancer deaths
+cancer rate
+
+We can now ask questions about cancer rate by year!
+"""
+
+raw_input(prompt)
 
 cancer_table.append([1998,500000,2500000,20.00])
 cancer_table.append([2018,600000,2700000,22.22])
@@ -177,8 +235,20 @@ print ("year,cancer,total,percent".split(","))
 for row in cancer_table:
 	print(row)
 
-print("Let's add a 2 rows to the cancer table...")
-raw_input("continue...")
+
+prompt = """
+Now a good question?  What if we wanted to add 
+two new data points we just found out about.
+Let's say data came in for 1998 and 2018:
+
+[1998,500000,2500000,20.00]
+[2018,600000,2700000,22.22]
+
+We can just append this to the cancer table
+and quickly filter by year!
+"""
+
+raw_input(prompt)
 
 tree_top = {}
 tree_top["yearly"] = {}
@@ -186,16 +256,40 @@ tree_top["yearly"]["data"] = cancer_table
 
 print(json.dumps(tree_top, indent=4))
 
-print("Let's make our own json...")
-raw_input("continue...")
+prompt = """
+Let's create our own json file.  Let's call
+it cancer.json and have it contain our 
+cancer table as data points.
+
+The first step is to create a top-level dict.
+
+We can than add dictionaries to it to describe
+the hierarcy.  In the above case, one hierarchy
+is:
+
+	"yearly" => "data" => <cancer table>
+
+Let's add some extra information!
+"""
+
+raw_input(prompt)
 
 meta = ["year","cancer_death","total_death","percent"]
 tree_top["yearly"]["meta"] = meta
 
 print(json.dumps(tree_top, indent=4))
 
-print("We can make our own meta data too!")
-raw_input("continue...")
+prompt = """
+One thing that might be valuable is metadata.
+Let's put the column names in meta.
+
+	"yearly" => "meta" => <column names>
+
+I think this makes for a great cancer.json document
+that can be used by us or others.
+"""
+
+raw_input(prompt)
 
 to_json = open('cancer.json','w')
 to_json.write(json.dumps(tree_top, indent=4))
@@ -205,8 +299,17 @@ from_json = open('cancer.json','r')
 json_contents = from_json.read()
 print(json_contents)
 
-print("Let's write to a file and then open it!")
-raw_input("continue...")
+prompt = """
+Let's finally write the file to disk for more 
+permanent storage (disk instead of memory). 
+Let's call it cancer.json.
+
+To confirm this, we can read the contents 
+of the file and print them to the screen.
+"""
+
+raw_input(prompt)
+
 
 
 
