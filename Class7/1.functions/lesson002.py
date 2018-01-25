@@ -53,7 +53,7 @@ goes back to the line of code where the call occurred.
 
 What about the second parameter in return <object>.  Well
 any python function can return another object or primitive.  This 
-is used mustly for assignment. 
+is used mostly for assignment. 
 
 Let's do some exercises!
 """
@@ -102,12 +102,12 @@ show that you can return many different values.  More importantly,
 we can assign the return value to a variable.
 """
 
+raw_input(prompt)
+
 def i_am_a_string():
 	return "I am a string!"
 
 print(i_am_a_string)
-
-raw_input(prompt)
 
 prompt="""
 What if we left out the parenthesis?  What would happen?  It ends up giving us

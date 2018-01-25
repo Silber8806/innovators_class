@@ -51,7 +51,7 @@ print(i_raise_you_to_a_power(5,5))
 def repeat_n_times(string_value, times):
 	return string_value * times
 
-print(repeat_n_times("many", 1000))
+print(repeat_n_times("many", 5))
 print(repeat_n_times("some?", 5))
 
 prompt="""
