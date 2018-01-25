@@ -1,228 +1,132 @@
 prompt="""
-The last lesson dealt with function references
-and showed how you could use a function 
-to produce a slightly modified version of a 
-function that was passed in.
+A topic worth covering is the concept of anonymous
+functions called lambda functions in Python.  Lambda's
+origin comes from the paradigm called functional 
+programming.  The 3 paradigms are:
 
-We call this a decorator, because it's 
-decorating or adding small bits of code 
-to other functions.  
+	procedural
+	functional
+	object-oriented
 
-The next topic we cover and the last one!
-Is the concept of "recursion".  What is 
-recursion?  Recursion is when we define
-a function, which calls itself!  
+Originally, Guido was not a fan of the lambda implementation,
+but it's now an accepted part of Python.  lambda's work and 
+act similar to JavaScript: reducers, mappers and functions in 
+general.
 
-Note: recursive functions are like while 
-loops, they can go on forever.  Python
-will actually "kill" your code if this
-happens.  
-"""
+What is a lambda?  Lambda is a function without a name:
 
-raw_input(prompt)
+	lambda x: x
 
-def special_power_formula(number):
-	if (number <= 0):
-		return 0
-	else:
-		return number ** number + special_power_formula(number -1)
+is the same as:
 
-print("can you figure out the special power formula?")
-for r in range(1,10):
-	print
-	print("special_power_formula(%s)" % str(r))
-	print(special_power_formula(r))
+	def no_name(x):
+		print(x)
 
-prompt="""
-In the above case, we do the following:
+Why use this notation?  It's easier to read:
 
-We take a number let's call it n and calculate:
+	lambda x: 2x
 
-	sum = (n ** n) + ((n - 1) ** (n - 1)) + ((n - 2) ** (n - 2))
+implies:
 
-for all values of n > 0.  If it's 0, we just add 0 to the above sum!
+	x => 2x
 
-This might seem confusing, so I will quickly explain what is happening!
+It looks like, an input x maps to a process of twice
+the value.
 
-1. When we call special_power_formula with a number.
-2. If number is less or equal to 0, it returns 0.  No other calculations happen.
-3. If number is greater than 0. It skips to:
-
-	return number ** number + special_power_formula(number - 1)
-
-The first step is: 
-
-	number ** number 
-
-Easy to calculate with the parameter.  What about the second part:
-
-	special_power_formula(number - 1)
-
-It's the function itself?  Remember the call stack in lesson001?  When
-a function call occurs, it adds it to the call stack:
-
-	special_power_formula(number) => call_stack[ line 32 ]
-
-It then initializes the function parameters and executes the code.  When it 
-sees:
-
-	special_power_formula(n - 1)
-
-It adds an aditional line number to the call stack:
-
-	special_power_formula(number) => call_stack[line 32, line 28]
-
-It starts a "new" version of special_power_formula and executes the code.
-Each time, the computer is keeping track of where the code has to return and
-which "version" of the code is running.
-
-It continues this process of special_power_formula calls until:
-
-	if (number <= 0):
-		return 0
-
-The result is that special_power_formula(0) is returned to special_power_formula(1) at:
-
-	return number ** number + special_power_formula(number -1)
-
-That is:
-	
-	return 1 ** 1 + 0
-
-How does it know where to return too.  It removes the last entry off the "call stack".
-
-It returns to the next level function (special_power_formula(2)):
-
-	return 2 ** 2 + 1
-
-where 1 is the result of special_power_formula(1)
-
-This returns to the next level function (special_power_formula(3)):
-
-	return 3 ** 3 + 5
-
-where 5 is the result of special_power_formula(2).
-
-Each step, the function looks up the call stack, returns the value and continues the return
-process.  That is, until the call_stack is exhausted and we reach the original number provided!
-
-Let's see the example with special_power_formula(4) as a series of steps:
-
-
-
-	first step: Add to call stack
-
-	1. special_power_formula(4) is called.
-	2. we add special_power_formula(4) to call stack (refernece to main code)
-
-	3. special_power_formula(3) is called.
-	4. we add special_power_formula(3) to call stack.
-
-	5. special_power_formula(2) is called.
-	6. we add special_power_formula(2) to call stack.
-
-	7. special_power_formula(1) is called.
-	8. we add special_power_formula(1) to call stack.
-
-	9. special_power_formula(0) is called.
-	10. we add special_power_formula(0) to call stack.
-
-
-
-
-	second step: create an exit condition.  Prevents infinite calls.
-
-	11. number <= 0, so 0 is returned. special_power_formula(0) = 0
-
-
-
-	last step: remove from the call stack and return each value.
-
-	12. we remove special_power_formula(0) from the call stack.
-	13. we return to code: special_power_formula(1) the next value in the call_stack.
-	14. we return to the return statement: n ** n + special_power_formula(n - 1)
-	15. we substitute values: n = 1, special_power_formula(0) = 0.
-	16. 1 ** 1 + 0 = 1, special_power_formula(1) returns 1
-
-	17. we remove special_power_formula(1) from the call stack.
-	18. we return to code: special_power_formula(2) the next value in the call_stack.
-	19. we return to the return statement: n ** n + special_power_formula(n - 1)
-	20. we substitute values: n = 2, special_power_formula(1) = 1.
-	21. 2 ** 2 + 1 = 5, special_power_formula(2) returns 5
-
-	22. we remove special_power_formula(2) from the call stack.
-	23. we return to code: special_power_formula(3) the next value in the call_stack.
-	24. we return to the return statement: n ** n + special_power_formula(n - 1)
-	25. we substitute values: n = 3, special_power_formula(2) = 5.
-	26. 3 ** 3 + 5 = 32, special_power_formula(3) returns 32
-
-	27. we remove special_power_formula(3) from the call stack.
-	28. we return to code: special_power_formula(4) the next value in the call_stack.
-	29. we return to the return statement: n ** n + special_power_formula(n - 1)
-	30. we substitute values: n = 4, special_power_formula(3) = 32.
-	31. 4 ** 4 + 32 = 288, special_power_formula(4) returns 288
-
-	32. we remove special_power_formula(4) from the call stack.
-	33. we return to where special_power_formula(4) was first called in the main code returning: 288	
-
-Why would I ever use the recursion technique?  Many problems do not require it and most can be 
-solved with iteration.  There are subsets of problems that recursion works very well at:
-
-	Going through a tree structure.  Imagine you have:
-
-		hospitals > departments > sub-departments > patients
-
-	If you want a list of patients and only could use iteration, you'd have to go through 
-	all departments, add them to a list and then iterate over the list.  Recursion can
-	solve the same problem with only a few lines of code.
-
-	Going through a social network.  
-
-		friends -> friends -> friends ...
-
-	Where does the friend network end?  2-3...8 deep.  Breadth first search and depth first
-	search are 2 special recursive algorithms.
-
-	Another great algorithm to look up:
-
-		Tower of Hanoi
-
-	Also:
-
-		Sudoku
-
-	You can solve sudoku with recursion.  It's probably easier to do so than to use iteration!
+lambda's are used in python when a function needs to 
+be provided, but it would be a pain to define one 
+earlier on.  It's just easier to have a one use function!
 
 """
 
 raw_input(prompt)
 
-
-#!/usr/bin/env python
-import sys
- 
-sys.setrecursionlimit(5000)
- 
-def factorial(n):
-    if n == 1:
-        return 1
-    else:
-        return n * factorial(n-1)
- 
-print factorial(3000)
-
+f = lambda x, y, z : x + y + z
+print(f(1,2,3))
 
 prompt="""
-If you comment out the code sys.setrecursionlimit(5000).
-This will fail!  Python only allows a few thousand calls to be 
-recorded on the call stack!  To increase this, we need
-to set the limit using sys.
+Above we show a lambda that adds 3 variables
+and returns the value.  Pretty simple.
+"""
 
-Note, if there is no break condition, you will get infinite
-recursion and hit that call stack limit sooner than later.
+raw_input(prompt)
 
-This is good as storing things on the stack (temp var, location etc)
-costs memory.  Infinite calls would require infinite memory (and time).
+multi_table = map(lambda x: (x,x ** 2),range(101))
+
+for row in multi_table:
+	print row
+
+prompt="""
+In the above case, we use a lambda function within 
+a special function called map.  Map takes a function
+(lambda) and applies it to an iterable object.  I 
+decided to simplify it by using the range() generator,
+which generates the sequence (0,1,2,3,4...100). 
+
+You could substitute a list here and it would apply
+the lambda over hte list.
+"""
+
+raw_input(prompt)
+
+filtered_table = filter(lambda x: x % 2, range(101))
+
+print("filter:")
+for row in filtered_table:
+	print(row)
+
+filtered_multi_table = map(lambda x : (x, x ** 2), filtered_table)
+
+print
+print("multi_table applied to filtered_table:")
+for row in filtered_multi_table:
+	print(row)
+
+prompt="""
+map is one of 3 operations that can be used against an iterable class.
+The other two are filter and reduce (similar to javascript equivalents).
+filter takes a function that returns a boolean value (True/False) based
+on the some input.  It then applies the function to all elements in
+the iterable object.  If an object caused the function to return True,
+it is added to a new list.  After the entire filter process is complete
+it returns the new list of objects (only those that return True).
+"""
+
+raw_input(prompt)
+
+reducer = reduce(lambda x, y: x ** 2 + y, range(5))
+print(reducer)
+
+
+prompts="""
+reducer is the strangest of the 3 methods: map, filter and reduce.
+A reducer starts with the first two indexes within an interable
+object.  It applies them to the function pairwise.  The reducer
+then takes the result returned by this operation and assigns it 
+to the first argument of the function and then takes the "next" 
+object from the iterable object.
+
+It keeps reassigning the return to the first argument and all subsequent
+arguments are retrieved from the iterable object until it is exhaused.
+
+The final return for the reducer is the return of the last function call.
+
+example:
+
+	reduce(lambda x, y: x ** 2 + y, range(5))
+
+	range(5) => (0,1,2,3,4)
+
+	first_reducer => 0 ** 2 + 1 => 1
+	second_reducer => 1 ** 2 + 2 => 3
+	third_reducer => 3 ** 2 + 3 => 12
+	fourth_reducer => 12 ** 2 + 4 => 148
+
+	returns 148
+
+Notice how the first_reducer takes the first 2 arguments within 
+range.  Afterwards, the first object is the return of the previous
+function and the second argument is the next element in the list.
 """
 
 raw_input(prompt)

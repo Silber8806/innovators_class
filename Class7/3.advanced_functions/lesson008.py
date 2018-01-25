@@ -182,4 +182,3 @@ the calculation for people doing mostly squares and cubes.
 raw_input(prompt)
 
 
-
