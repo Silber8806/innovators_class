@@ -1,0 +1,25 @@
+{
+	"Mass General": {
+		"accepts": [
+			"Aetna",
+			"Tufts",
+			"Harvard Pilgrim"
+		],
+		"balance":500000
+	},
+	"Mt Auburn": {
+		"accepts": [
+			"Aetna",
+			"Tufts"
+		],
+		"balance":350000
+	},
+	"St. Mary": {
+		"accepts": [
+			"Aetna",
+			"Tufts",
+			"Harvard Pilgrim"
+		],
+		"balance":50000
+	}	
+}

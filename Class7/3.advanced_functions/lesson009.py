@@ -1,264 +1,132 @@
 prompt="""
-Alright, we showed how functions are objects and
-can be used with variables.
+A topic worth covering is the concept of anonymous
+functions called lambda functions in Python.  Lambda's
+origin comes from the paradigm called functional 
+programming.  The 3 paradigms are:
 
-We expanding on that by showing a list and dictionary
-used to call all functions present!  This is common
-if you want to register or deregister a set of functions
-for data processing (if they don't apply to all situations).
+	procedural
+	functional
+	object-oriented
 
-The last thing we checked was partial functions.  Where
-we "call" another function at the ending of a function 
-with a subset of the parameters filled out!
+Originally, Guido was not a fan of the lambda implementation,
+but it's now an accepted part of Python.  lambda's work and 
+act similar to JavaScript: reducers, mappers and functions in 
+general.
 
-This section gets even stranger?  We use a function
-to define another function and then pass 
-that function reference (not call) back?  
+What is a lambda?  Lambda is a function without a name:
 
-This strange concept is called a decorator!  It gets
-at the essense of functions as objects!
+	lambda x: x
 
-This is best seen in examples!
+is the same as:
+
+	def no_name(x):
+		print(x)
+
+Why use this notation?  It's easier to read:
+
+	lambda x: 2x
+
+implies:
+
+	x => 2x
+
+It looks like, an input x maps to a process of twice
+the value.
+
+lambda's are used in python when a function needs to 
+be provided, but it would be a pain to define one 
+earlier on.  It's just easier to have a one use function!
+
 """
 
 raw_input(prompt)
 
-def login(func):
-	def wrapper():
-		print "you have successfully logged on!"
-		func()
-	return wrapper
-
-def first_function():
-	print "I am first!"
-	return 0
-
-def second_function():
-	print "I am second!"
-	return 0
-
-print
-print("function without decorator!")
-first_function()
-print
-print("second function without decorator!")
-second_function()
-
-print
-print("let's add a decorator?")
-new_first_func = login(first_function)
-new_second_func = login(second_function)
-
-print
-print("new first function?")
-new_first_func()
-
-print
-print("new second function?")
-new_second_func()
+f = lambda x, y, z : x + y + z
+print(f(1,2,3))
 
 prompt="""
-The first time I saw this type of code?  I was really confused?
-
-I will explain this in small steps:
-
-1. We define login with a func parameter (a function):
-
-	def login(func):
-
-The important thing to note is that the parameter is the name of 
-a function called func!
-
-2. A new function gets defined called wrapper!
-
-	def wrapper()
-
-Based on the first lesson, when we define a function, it associates
-<name> with <code>.
-
-	<name> => <code>
-
-3. What is the <code> defined in wrapper?
-
-	print "You have successfully logged on!"
-	func()
-
-the print statement is basic python language, but what about the function?
-When we pass in a function at step 1.  It associates:
-
-	func = (<value>)
-
-that then gets substituted into the code.
-
-	print "You have successfully logged on!"
-	value()
-
-4. the last statement is to return wrapper function.  Why?
-
-No matter what <value> we pass in, the print statement is added 
-to it and followed by the call: <value>().  This is a generic
-way to add "you have successfully logged on" to any function!
+Above we show a lambda that adds 3 variables
+and returns the value.  Pretty simple.
 """
 
 raw_input(prompt)
 
-def login(func):
-	def wrapper():
-		print "you have successfully logged on!"
-		func()
-	return wrapper
+multi_table = map(lambda x: (x,x ** 2),range(101))
 
-def first_function():
-	print "I am first!"
-	return 0
-
-def second_function():
-	print "I am second!"
-	return 0
-
-print
-print("function without decorator!")
-first_function()
-print
-print("second function without decorator!")
-second_function()
-
-print
-print("let's add a decorator?")
-first_function = login(first_function)
-second_function = login(second_function)
-
-print
-print("new first function?")
-first_function()
-
-print
-print("new second function?")
-second_function()
+for row in multi_table:
+	print row
 
 prompt="""
-Let's modify the code a bit more.  We change
-the variable name to the function being 
-passed in.  
+In the above case, we use a lambda function within 
+a special function called map.  Map takes a function
+(lambda) and applies it to an iterable object.  I 
+decided to simplify it by using the range() generator,
+which generates the sequence (0,1,2,3,4...100). 
 
-Since variables evaluate things on the right 
-first, it provides us with the new "wrapper"
-function.  So:
-
-	login(first_function)
-
-returns the wrapper and:
-
-	first_function =
-
-associates first_function with the wrapper.
-
-We can now call first_function:
-
-	first_function()
-
-and it calls the new modified version of first function!
-
-We do the same thing with second function!
+You could substitute a list here and it would apply
+the lambda over hte list.
 """
 
 raw_input(prompt)
 
+filtered_table = filter(lambda x: x % 2, range(101))
 
-def login(func):
-	def wrapper():
-		print "you have successfully logged on!"
-		func()
-	return wrapper
+print("filter:")
+for row in filtered_table:
+	print(row)
 
-@login
-def first_function():
-	print "I am first!"
-	return 0
-
-@login
-def second_function():
-	print "I am second!"
-	return 0
+filtered_multi_table = map(lambda x : (x, x ** 2), filtered_table)
 
 print
-print("new first function?")
-first_function()
-
-print
-print("new second function?")
-second_function()
+print("multi_table applied to filtered_table:")
+for row in filtered_multi_table:
+	print(row)
 
 prompt="""
-Programmers got so lazy of typing the previous 
-output, that they created a new symbol for:
-
-	first_function = login(first_function)
-
-This symbol is:
-
-	@<decorator>
-	def <name>(<parameters>)
-
-This automatically applies the login function 
-to the function definition.  It makes the code
-a lot easier to read and is more process.
-
-If I want to know what @login does, I just have
-to look at login function and see what code 
-is added to the wrapper.
-
-I can also at a glance see where login applies
-as the @ symbol quickly gives it away!
+map is one of 3 operations that can be used against an iterable class.
+The other two are filter and reduce (similar to javascript equivalents).
+filter takes a function that returns a boolean value (True/False) based
+on the some input.  It then applies the function to all elements in
+the iterable object.  If an object caused the function to return True,
+it is added to a new list.  After the entire filter process is complete
+it returns the new list of objects (only those that return True).
 """
 
 raw_input(prompt)
 
-def login(func):
-	def wrapper(*args,**kwargs):
-		func(*args,**kwargs)
-	return wrapper
+reducer = reduce(lambda x, y: x ** 2 + y, range(5))
+print(reducer)
 
-@login
-def first_function(log_message):
-	print "I am first!"
-	return 0
 
-@login
-def second_function(log_message):
-	print "I am second!"
-	return 0
+prompts="""
+reducer is the strangest of the 3 methods: map, filter and reduce.
+A reducer starts with the first two indexes within an interable
+object.  It applies them to the function pairwise.  The reducer
+then takes the result returned by this operation and assigns it 
+to the first argument of the function and then takes the "next" 
+object from the iterable object.
 
-print
-print("new first function?")
-first_function("message!")
+It keeps reassigning the return to the first argument and all subsequent
+arguments are retrieved from the iterable object until it is exhaused.
 
-print
-print("new second function?")
-second_function("my message!")
+The final return for the reducer is the return of the last function call.
 
-prompt="""
-We can modify the decorator so that 
-it can decorate functions that have 
-parameters.
+example:
+
+	reduce(lambda x, y: x ** 2 + y, range(5))
+
+	range(5) => (0,1,2,3,4)
+
+	first_reducer => 0 ** 2 + 1 => 1
+	second_reducer => 1 ** 2 + 2 => 3
+	third_reducer => 3 ** 2 + 3 => 12
+	fourth_reducer => 12 ** 2 + 4 => 148
+
+	returns 148
+
+Notice how the first_reducer takes the first 2 arguments within 
+range.  Afterwards, the first object is the return of the previous
+function and the second argument is the next element in the list.
 """
 
 raw_input(prompt)
-
-
-prompt="""
-Note, some people can get very deep
-on the subject of a decorator applying
-decorators within decorators!  Often
-complex decorators can create a lot of
-complexity, which makes it hard to manage.
-
-Decorators can be useful when you want to
-modify a series of functions all at once
-(decorating).
-"""
-
-raw_input(prompt)
-
-
-
