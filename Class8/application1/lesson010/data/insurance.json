@@ -1,0 +1,23 @@
+{
+	"Aetna":{
+		"balance":1000000,
+		"policies":{
+			"preventative":100,
+			"lab":80
+		}
+	},
+	"Tufts":{
+		"balance":500000,
+		"policies":{
+			"preventative":100,
+			"lab":80
+		}
+	},
+	"Harvard Pilgrim":{
+		"balance":25000,
+		"policies":{
+			"preventative":100,
+			"lab":80
+		}
+	}
+}

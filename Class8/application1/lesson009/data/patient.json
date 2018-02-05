@@ -1,0 +1,14 @@
+{
+	"Sam":{
+		"balance":2000,
+		"insurance":"Aetna"
+	},
+	"Jane":{
+		"balance":500,
+		"insurance":"Tufts"
+	},
+	"Marty":{
+		"balance":250000,
+		"insurance":"Harvard Pilgrim"
+	}
+}

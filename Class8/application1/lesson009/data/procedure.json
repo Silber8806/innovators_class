@@ -1,0 +1,10 @@
+{
+	"blood shot":{
+		"cost": 200,
+		"type": "lab"
+	},
+	"check-up":{
+		"cost": 50,
+		"type": "preventative"
+	}
+}
