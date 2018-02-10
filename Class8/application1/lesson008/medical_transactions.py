@@ -1,30 +1,6 @@
-prompt="""
-Let's keep our objectives listed here:
-
-We add a new feature:
-1. Knows the balances of all 3 entity types: patient, doctor and insurance company and can report on it.
-2. Knows the cost of procedures.
-3. Knows what insurance a patient has.
-4. Knows which providers accept certain certain insurance companies.
-5. Charges the insurance company for a covered portion of the medical procedure.
-6. After deducting the insurance portion from the insurance company, charge the patient the final amount.
-7. Pay the physician the difference between the two rates.
-
-We keep building on the above.  The issue from the previous construction is we don't know what rates the 
-insurance company pays for a procedure or general coverage.  We need to add a bullet point for that.
-"""
-
-raw_input(prompt)
-
 import json
 import tests.test as test
 from data.database import *
-
-prompt="""
-
-"""
-
-raw_input(prompt)
 
 def get_all_balances(patients,insurances,providers):
 	return [get_balance(obj[0],obj[1]) for obj in [patients,insurances,providers]]
