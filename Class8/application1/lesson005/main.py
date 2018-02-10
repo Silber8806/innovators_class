@@ -1,24 +1,25 @@
 prompt="""
-Let's keep our objectives listed here:
+The medical_procedure function was getting very long.  When
+a function gets really long it is often hard to follow.
 
-We add a new feature:
-1. Knows the balances of all 3 entity types: patient, doctor and insurance company and can report on it.
-2. Knows the cost of procedures.
-3. Knows what insurance a patient has.
-4. Knows which providers accept certain certain insurance companies.
-5. Charges the insurance company for a covered portion of the medical procedure.
-6. After deducting the insurance portion from the insurance company, charge the patient the final amount.
-7. Pay the physician the difference between the two rates.
+I decided to take some of the logic out of medical_procedure
+and create new functions to cover that code.  The new functions
+are:
 
-We keep building on the above.  The issue from the previous construction is we don't know what rates the 
-insurance company pays for a procedure or general coverage.  We need to add a bullet point for that.
-"""
+	calculate_payments : calculates the insurance and patient portions
+	of the payment.  Returns a pay_structure list that contains both
+	charges.
 
-raw_input(prompt)
+	print_all_balances : we are constantly printing the balance
+	either before or after a transaction.  Figuring out the state
+	of all entities involved in a transaction is a great debugging 
+	too.  We isolate this print functionality here.
 
+	calculate_final_balances : this is the function that goes through
+	all entities and updates their remaining balances.  
 
-prompt="""
-
+Once we are done, the medical_procedure function is significantly smaller
+and easier ot read.  Function calls also reflect their specific purpose.
 """
 
 raw_input(prompt)
@@ -161,7 +162,9 @@ def calculate_payments(patient,insurance,provider,procedure):
 	return pay_structure
 
 def print_all_balances(patient,insurance,provider):
-	patient_balance,insurance_balance,provider_balance = get_all_balances([patients,patient],[insurance_companies,insurance],[providers,provider])
+	patient_balance,insurance_balance,provider_balance = get_all_balances([patients,patient],\
+																		  [insurance_companies,insurance],\
+																		  [providers,provider])
 	print
 	print("CURRENT BALANCE:")
 	print("%s:%s" % (patient,patient_balance))
@@ -173,7 +176,9 @@ def print_all_balances(patient,insurance,provider):
 
 def calculate_final_balances(patient,insurance,provider,procedure,insurance_pay, patient_pay):
 	balances = []
-	patient_balance,insurance_balance,provider_balance = get_all_balances([patients,patient],[insurance_companies,insurance],[providers,provider])
+	patient_balance,insurance_balance,provider_balance = get_all_balances([patients,patient],\
+																		  [insurance_companies,insurance],\
+																		  [providers,provider])
 	procedure_cost=procedures[procedure]["cost"]
 	final_insurance_balance = insurance_balance - insurance_pay
 	final_balance = patient_balance - patient_pay

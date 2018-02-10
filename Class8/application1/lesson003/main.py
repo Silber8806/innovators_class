@@ -1,27 +1,53 @@
 prompt="""
-Let's keep our objectives listed here:
+After developing the patient relationship to the procedure, we 
+decide to tackle the insurance company logic.  We want to 
+separate this logic into a few steps.   The first step
+is to figure out if an insurance company is accepted by 
+a provider.  To create this relationship, we have to:
 
-1. Knows the balances of all 3 entity types: patient, doctor and insurance company and can report on it.
-2. Knows the cost of procedures.
-3. Knows if a patient is covered by an insurance policy based on the doctor they visit.
-4. Charges the insurance company for a covered portion of the medical procedure.
-5. After deducting the insurance portion from the insurance company, charge the patient the final amount.
-6. Pay the physician the difference between the two rates.
+1. figure out what the patient's insurance is.
+2. figure out if the provider accepts the insurance.
 
-We will call each of these bullet points a story, develop the feature and then test with our users 
-to see if it meets there needs.
+To do this, we replace the providers and patient dicts 
+with two JSON objects.  The first, providers, now has 
+a property accepts for each hospital, which lists 
+all the acceptable insurance policies.  It also has
+a balance property for it's bank balance.
 
-We do this in interative fashion.  Develop a feature within a week or so.  Create tests to gurantee
-it works as we think.  Then we have users test it (user testing) and see if they agree it meets their
-needs.  If not, we makes notes about it and change the above list to figure out the new features.
-
-This procedure is similar (but less detailed) then agile development.
+The patients dict is also turned into a JSON object.  It
+has an insurance property and a balance.  The insurance
+property is the patients current insurance.
 """
 
 raw_input(prompt)
 
 prompt="""
+When developing the logic, I decided to split up some
+tasks as helper functions.  I created:
 
+    get_balance - get the bank balance of any entity.
+    valid_transaction - check if all the entities mention exist.
+    accepts_insurance - check if an insurance company is accepted by a provider.
+
+We can use these functions within medical_procedure, to simplify things 
+and make it more readable.
+"""
+
+raw_input(prompt)
+
+
+prompt="""
+The medical_procedure function can be split into two parts.  The first
+checks if a transaction is valid, if it is, it splits the payment into
+insurance and patient portion.  If the insurance is not accepted, it 
+just assigns the entire cost to the patient's bill.
+
+The second part of the logic, adjusts the balances of patient.  We
+purposely don't tackle the insurance company yet, by making the 
+insurance payout = 0 as a placeholder.  
+
+We can tackle the calculation of the insurance payment next.  This 
+is worth doing as the doctor has not specified hte logic yet!
 """
 
 raw_input(prompt)

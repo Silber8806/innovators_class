@@ -1,24 +1,30 @@
 prompt="""
-Let's keep our objectives listed here:
+We continue from the previous lesson focusing now exclusively on 
+developing the logic for calculating what the insurance company
+owes and applying it to the new balance.
 
-We add a new feature:
-1. Knows the balances of all 3 entity types: patient, doctor and insurance company and can report on it.
-2. Knows the cost of procedures.
-3. Knows what insurance a patient has.
-4. Knows which providers accept certain certain insurance companies.
-5. Charges the insurance company for a covered portion of the medical procedure.
-6. After deducting the insurance portion from the insurance company, charge the patient the final amount.
-7. Pay the physician the difference between the two rates.
+We first expand both the procedures and insurance companies into json 
+objects with 2 new properties each.  These properties are:
 
-We keep building on the above.  The issue from the previous construction is we don't know what rates the 
-insurance company pays for a procedure or general coverage.  We need to add a bullet point for that.
-"""
+	procedure:
+	cost - cost of a procedure
+	type - the type of the procedure
 
-raw_input(prompt)
+	insurance_companies:
+	balance - bank balance
+	policies - types of procedures covered with percents.
 
+We also create a few new functions:
 
-prompt="""
+	insurance_coverage - this is a helper function that retrieves
+	the coverage percent based on company and procedure type.
+	set_balance - this modifies the JSON file by overwriting
+	the balance.
 
+We use these new functions to calculate the insurance_payout 
+and set the balance for patient, provider and insurance_company.
+
+see the new logic below:
 """
 
 raw_input(prompt)

@@ -1,3 +1,61 @@
+prompt="""
+By far the most complicated addition to our code.
+
+To run this code, you need to run:
+
+	pip install click
+
+click is a python library that effectively uses
+decorators in it's implementation.  
+
+What is click?
+
+Click is a CLI generator.  A CLI is a command-line
+interface.  A command-line interface is a series 
+of commands that get added to the terminal that 
+execute python functions (as a proxy).  
+
+Click will allow us to type on the cmd/terminal:
+
+	python main.py medical_procedure <patient> <procedure> <provider>
+
+and it will execute the python function medical procedure with that triplet.
+
+Similarly, based on the decorators, we can execute run_tests using:
+
+	python main.py run_tests
+
+What determines the arguments a function accepts and help comments when
+you type a command incorrects?
+
+	@cli.command(help="-do the medical prodecure: requires <patient> <procedure> <provide>!")
+	@click.argument('patient',nargs=1)
+	@click.argument('procedure',nargs=1)
+	@click.argument('provider',nargs=1)
+	def medical_procedure(patient,procedure,provider):
+
+The cli.command decorator provides the help information.  The cli.arguments tell the command
+line to search for specific values and assign them to function parameters: patient, procedure and provider 
+(in that order).  
+
+	@click.group()
+	def cli():
+
+and 
+
+	cli()
+
+are the commands that "trigger" the commandline menus.  If you comment out the cli() part, it will
+no longer run.
+
+If you find this concept interesting, you should google and read up on the click library.  
+
+I have used this library at work (it's great!).
+"""
+
+raw_input(prompt)
+
+
 import json
 import click
 import tests.test as test

@@ -1,23 +1,43 @@
 prompt="""
-Let's keep our objectives listed here:
+We now have the functionality to handle the entire 
+payment process: from splitting the bill between 
+insurance_company and patient to paying the doctor.
 
-We add a new feature:
-1. Knows the balances of all 3 entity types: patient, doctor and insurance company and can report on it.
-2. Knows the cost of procedures.
-3. Knows what insurance a patient has.
-4. Knows which providers accept certain certain insurance companies.
-5. Charges the insurance company for a covered portion of the medical procedure.
-6. After deducting the insurance portion from the insurance company, charge the patient the final amount.
-7. Pay the physician the difference between the two rates.
+A single process is cumbersome and so we need to
+start thinking about how to process many records
+at the same time.  We call this "batch" processing.
 
-We keep building on the above.  The issue from the previous construction is we don't know what rates the 
-insurance company pays for a procedure or general coverage.  We need to add a bullet point for that.
-"""
+Before we begin building logic, we need to think 
+of a good data format that we can provide to the 
+system.
 
-raw_input(prompt)
+I use create_test_json to model this data structure.
+create_test_json creates a JSON object that contains
+keys representing a transaction_id.  Each transaction
+id is linked to a transaction, which contains 3 values:
+	
+	patient
+	procedure
+	provider
 
+Many transaction_ids ares stored with their associated 
+transactions:
 
-prompt="""
+	{
+		"1" : {"patient":<name>, "procedure": <procedure>, provider: <provider> },
+		"2" : {"patient":<name>, "procedure": <procedure>, provider: <provider> },
+		"3" : {"patient":<name>, "procedure": <procedure>, provider: <provider> },
+		"4" : {"patient":<name>, "procedure": <procedure>, provider: <provider> },
+		"5" : {"patient":<name>, "procedure": <procedure>, provider: <provider> },
+	}
+
+This transaction JSON file is pretty easy to process.  We just loop through
+each transaction_id and feed the 3 values to the medical_procedure function.  The
+function then processes everything.  We add some print statements to a few functions
+to provide clarifying output.  The function that processes the json file is called:
+
+	process_transactions
+
 
 """
 
