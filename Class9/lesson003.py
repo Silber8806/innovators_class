@@ -1,219 +1,150 @@
 prompt="""
-objects are definition first class members and
-can be used in arrays, passed into functions 
-or even be used to instantiate other instances
-(from the same or other classes).
+Attributes are the equivalent of dictionary keys 
+in lesson001.  How would you model ignite, car_report
+and car_make_and_model functions?
 """
 
 raw_input(prompt)
 
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
+def ignite_camaro():
+	print "Vroom Vroom"
 
-origin = pt(0,0)
-print(origin)
+def ignite_mustang():
+	print "Vroom VROOOOOOOOOOOMMMMMMMMMMMMM!"
 
-pts = [(x,y) for x in range(-10,10) for y in range(-10,10)]
+def car_report(**car_dict):
+	for trait, trait_value in car_dict.iteritems():
+		print(trait,trait_value)
+	return None
 
-print("pts on graph:")
-print(pts)
+def car_make_and_model(d,model,make):
+	return d['model'] + " " + d['make']
 
-graph_maker = lambda x,y : pt(x,y)
-graph = [graph_maker(x,y) for x,y in pts]
-
-print("actual graph construct!")
-print(graph)
 
 prompt="""
-Above, we first iterate over all points on a graph (integer only) between
-x = (-10, 10) and y = (-10 , 10).  We print this!
-
-We then feed the (x,y) coordinates to a graph_maker function, which creates 
-a graph of points.  When we print this, we see the (x,y) coordinates have
-been converted to 100 pt objects.
-
-That looks ugly though!
+We can define functions associated with an object by defining
+them within a class.  The only difference is that the keyword
+self is added to this.
 """
 
 raw_input(prompt)
 
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
+class Car:
+	def __init__(self,car_id, model,make,year,price,seats=4):
+		self.car_id = car_id
+		self.model = model
+		self.make = make
+		self.year = year
+		self.price = price 
+		self.seats = seats
+
+	def ignite(self):
+		if (self.make == 'Mustang'):
+			print("Vroom VROOOOOOOOOOOMMMMMMMMMMMMM!")
+		elif (self.make) == 'Camaro':
+			print("Vroom Vroom!")
+		else:
+			print("Vroom!")
+
+	def car_report(self):
+		print(self.car_id)
+		print(self.model)
+		print(self.make)
+		print(self.year)
+		print(self.price)
+		print(self.seats)
+		return None
+
+
+prompt="""
+We can define functions associated with an object by defining
+them within a class.  The only difference is that the keyword
+self is added to this.
+"""
+
+raw_input(prompt)
+
+car1 = Car(1,'Ford','Mustang','2010','35000',4)
+car2 = Car(2,'Chevrolet','Camaro','2008','21000',4)
+
+car1.ignite()
+car2.ignite()
+
+prompt="""
+We can call the functions bound to a object by using . notation:
+<object>.<func>(<parameters>).  
+
+What about the self parameter?  The self parameter is supplied 
+by the <object> portion of this call.  
+"""
+
+raw_input(prompt)
+
+print
+car1.car_report()
+print
+car2.car_report()
+
+prompt="""
+We don't need to add a dictionary to the car_report call.  It's provided
+by the object itself.  This is called encapsulation.  We can't see 
+all the data inside car1 or car2, but the function itself has access to it.
+"""
+
+raw_input(prompt)
+
+class Car:
+	def __init__(self,car_id, model,make,year,price,seats=4):
+		self.car_id = car_id
+		self.model = model
+		self.make = make
+		self.year = year
+		self.price = price 
+		self.seats = seats
+
+	def ignite(self):
+		if (self.make == 'Mustang'):
+			print("Vroom VROOOOOOOOOOOMMMMMMMMMMMMM!")
+		elif (self.make) == 'Camaro':
+			print("Vroom Vroom!")
+		else:
+			print("Vroom!")
+
+	def car_report(self):
+		print(self.car_id)
+		print(self.model)
+		print(self.make)
+		print(self.year)
+		print(self.price)
+		print(self.seats)
+		return None
 
 	def __repr__(self):
-		return "(%s,%s)" % (self.x,self.y)
+		return str(self.car_id) + ":" + self.model + " " + self.make
 
-pts = [pt(x,y) for x in range(-10,10) for y in range(-10,10)]
+car3 = Car(1,'Ford','Mustang','2010','35000',4)
+car4 = Car(2,'Chevrolet','Camaro','2008','21000',4)
 
-print(pts)
-
-
-prompt="""
-Alright, let's consolidate a bit.  We use a new function called:
-
-	__repr__
-
-Why the double underscore?  These are called magic methods!  
-Magic methods are attached to symbols (+,- signs), special 
-functions (print) or specific methods!  
-
-	__repr__ 
-
-means representation.  The result of __repr__ has to be a string
-and it is what the print function returns for an object (when printed).
-"""
-
-raw_input(prompt)
-
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
-
-	def __repr__(self):
-		return "(%s,%s)" % (self.x,self.y)
-
-	def __add__(self,opp_pt):
-		if (isinstance(opp_pt,tuple)):
-			x, y = opp_pt 
-			self.x += x
-			self.y += y
-		elif (isinstance(opp_pt,pt)):
-			self.x += opp_pt.x
-			self.y += opp_pt.y
-		return (self.x,self.y)
-
-
-pts = [pt(x,y) for x in range(-10,10) for y in range(-10,10)]
-
-solution = pt(1,1) + (2,2)
-print(solution)
-
-solution = pt(1,1) + pt(2,2)
-print(solution)
+print
+print("unmodifed:")
+print(car1)
+print(car2)
+print
+print("modifed:")
+print(car3)
+print(car4)
+print
 
 prompt="""
-We added another function __add__.  This is the 
-addition symbol (+)?  
+car_make_and_model function describes each car well!  It would be 
+useful if when we printed the car, it would print the make and model!
+We could even add car_id into it!
 
-In my specific version of the function, I can either 
-"add" a tuple or a pt to another pt!  
-"""
-
-raw_input(prompt)
-
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
-
-	def __repr__(self):
-		return "(%s,%s)" % (self.x,self.y)
-
-	def __add__(self,opp_pt):
-		if (isinstance(opp_pt,tuple)):
-			x, y = opp_pt 
-			self.x += x
-			self.y += y
-		elif (isinstance(opp_pt,pt)):
-			self.x += opp_pt.x
-			self.y += opp_pt.y
-		return pt(self.x,self.y)
-
-
-solution = pt(1,1) + pt(2,2) + pt(-3,-3)
-print(solution)
-
-prompt="""
-We can't add 3 points in the original code.  The return
-of __add__ was a tuple.  We want to it to return a pt
-instead, which we can use with other points in the future.
-
-This allows us to add 3 points and return a new point, which
-can be used with other future points!
+__repr__ has to return a string.  It is what print uses when it prints
+an object!
 """
 
 raw_input(prompt)
 
 
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
 
-	def __repr__(self):
-		return "(%s,%s)" % (self.x,self.y)
-
-	def add(self,x,y):
-		self.x += x
-		self.y += y
-		return self
-
-	def __add__(self,opp_pt):
-		if (isinstance(opp_pt,tuple)):
-			x, y = opp_pt 
-			self.x += x
-			self.y += y
-		elif (isinstance(opp_pt,pt)):
-			self.x += opp_pt.x
-			self.y += opp_pt.y
-		return self
-
-
-solution = pt(1,1)
-print(solution)
-
-
-prompt="""
-We can combine magic methods with standard methods
-as long as the return of add is also a pt!
-"""
-
-raw_input(prompt)
-
-
-class pt:
-	def __init__(self,x,y):
-		self.x = x
-		self.y = y
-
-	def __repr__(self):
-		return "(%s,%s)" % (self.x,self.y)
-
-	def add(self,x,y):
-		self.x += x
-		self.y += y
-		return self 
-
-	def __add__(self,opp_pt):
-		if (isinstance(opp_pt,tuple)):
-			x, y = opp_pt 
-			self.x += x
-			self.y += y
-		elif (isinstance(opp_pt,pt)):
-			self.x += opp_pt.x
-			self.y += opp_pt.y
-		return self
-
-
-solution = pt(1,1).add(1,1).add(1,1).add(1,1)
-print(solution)
-
-
-prompt="""
-Wait, why is the method being called over and over again?
-How can that be possible?  Welcome to the concept of 
-chaining!
-
-If you return self for a function, you are returning the reference
-to the object itself!  That object contains add method.  You can
-then call add again!
-
-Remember self is just a reference to an object!
-"""
-
-raw_input(prompt)
