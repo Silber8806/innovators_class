@@ -37,7 +37,7 @@ class Car:
 
 prompt="""
 Before we can create an object, we need to define it (like def statement).
-To do this, we create a class, which can be seen as a template!
+To do this, we create a class, which can be seen as a template for an objects!
 
 The above is a Car Class, which will produce Car objects or instances.  The
 __init__ function is called the constructor.  It's what is used to create 
@@ -62,7 +62,10 @@ and associates it with car1 variable.
 
 We can now use <object>.<variable> to retrieve any
 of the attributes.  This is more substinct then
-using a dictionary.
+using a dictionary.  
+
+From this point on we will call an 
+object's variables: object attributes.
 """
 
 raw_input(prompt)
@@ -100,8 +103,9 @@ instances share the same reference.
 
 That reference is different between cars (instances)!
 
-When you construct a 2 cars, both entities are different
-objects!
+When you construct 2 cars, both entities are different
+objects!  All variables associated with it occupy 
+different spaces as well (in-theory).
 """
 
 raw_input(prompt)
@@ -124,9 +128,9 @@ print("price: %s" % car2.price)
 print("seats: %s" % car2.seats)
 
 prompt="""
-A cars variables are independently retrieable using the 
-<object>.<variable> notation.  A object's variables are 
-called attributes!
+A cars attributes are independently retrieable using the 
+<object>.<variable> notation.  Notice how return type 
+is completely dependent on <object> attribute.
 """
 
 raw_input(prompt)

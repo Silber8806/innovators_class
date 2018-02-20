@@ -1,10 +1,42 @@
 prompt="""
-MRO
+The below is a more advanced case where I take the code 
+from lesson 1 and write it in a more object-oriented 
+way.  Notice, object-oriented code is often intuitive
+and represent real world objects well.
+
+In the below case, we have:
+
+	Car
+	Car Policies
+	Factory
+
+The factory creates cars.  It only controls the number
+of cars being produced.
+
+The Car Policy determins what cars are going to be 
+produced and what the common features of the cars are.
+
+The Car just takes arguments from the factory and 
+produces a standard car.  After production, you 
+can modify the attributes and use the attached methods.
+
+This seems like a lot of code right?  Well, it is a lot
+of upfront investment, but the result is the main 
+function is unbelivably clean!
+
+The other thing is, modifications, if isolated correctly
+in classes are easier to maintain!
+
+On the other hand, objects can also introduce complication.
+The internal state of objects can sometimes cause hang-ups!
+
+Overall, the below code is a signficant improvement in 
+terms of readability and maintainance than lesson1 code!
 """
 
-import datetime
-
 raw_input(prompt)
+
+import datetime
 
 class Car:
 	def __init__(self,car_id, model,make,year,price,seats=4):
@@ -113,4 +145,17 @@ def main():
 	print(Honda.cars)
 
 main()
+
+prompt="""
+This is a more professionally done section, which shows 
+more advanced code without getting into too much detail.
+
+In the below classes, we have a Car, a Car Policy and 
+a Car Factory.
+
+Factories are production lines for any type of car.
+They control production of cars.
+"""
+
+raw_input(prompt)
 
