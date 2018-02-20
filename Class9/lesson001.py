@@ -1,5 +1,6 @@
 prompt="""
-Before we talk about classes and instances, let's create motivation!
+Before we talk about classes, instances and inheritance, we will do a
+imperative example.
 """
 
 raw_input(prompt)

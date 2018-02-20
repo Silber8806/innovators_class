@@ -1,5 +1,8 @@
 prompt="""
-Inheritance and Classes
+Let's begin this next lesson on inheritance with
+just a class and an instance.  We will then develop
+a method of sharing attributes and methods between
+different classes.
 """
 
 raw_input(prompt)
@@ -17,7 +20,9 @@ Jane = Person("Jane")
 Jane.introduction()
 
 prompt="""
-Inheritance and Classes
+In the above, we have a Person class, which
+can introduce itself using it's name.
+Pretty simple.
 """
 
 raw_input(prompt)
@@ -39,7 +44,15 @@ Jane = Employee("Jane")
 Jane.introduction()
 
 prompt="""
-Inheritance and Classes
+In the above, we have an employee class, which 
+references in it's parameter: Person.
+
+This is called inheritance.  In inheritance, one
+class inherits all the methods and attributes 
+of a parent class.
+
+In this case, Employee inherits the introduction
+method.
 """
 
 raw_input(prompt)
@@ -69,7 +82,13 @@ Jane.steal_information()
 Jane.introduction()
 
 prompt="""
-Inheritance and Classes
+Notice, we can inherit from many different sources.
+This is called multiple inheritance.  Note, not 
+all computer languages support multiple inheritance.
+
+Java for example, has only single inheritance, but has
+a concept of interfaces (I concept that doesn't exist
+in Python)
 """
 
 raw_input(prompt)
@@ -109,7 +128,15 @@ print(Jane.salary)
 
 
 prompt="""
-Inheritance and Classes
+The last example shows that inheritance is hierachial.
+You can have a CEO that inherits from Employee, which
+inherits from person.  All the methods are combined
+in the CEO clasa.
+
+CEO in the above case can:
+> Make introductions like any other person.
+> Get a raise like any employee.
+> make personal speeches, which is something only CEOs can do?
 """
 
 raw_input(prompt)

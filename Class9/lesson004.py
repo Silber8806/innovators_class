@@ -140,6 +140,18 @@ prompt="""
 points on a graph shouldn't change.  They should be immutable.
 Vector's on the otherhand can be multipled and added.  The references
 x and y should change based on method calls.
+
+In the above, we treat pt as if it is immutable (by having no method calls
+that modify self.x and self.y).  Vector on the other hand has methods 
+that modify self.x adn self.y.
+
+Note, this immutability is artificial in that you can still modify the 
+attribute using:
+
+	self.x = value
+
+But the intent is more clear.  We generally like to use methods to modify
+internal state (debatable of course...depending on developer).
 """
 
 raw_input(prompt)

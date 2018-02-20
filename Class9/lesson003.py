@@ -76,6 +76,8 @@ We can call the functions bound to a object by using . notation:
 
 What about the self parameter?  The self parameter is supplied 
 by the <object> portion of this call.  
+
+Note, functions associated with a object are called methods.
 """
 
 raw_input(prompt)

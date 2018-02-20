@@ -1,5 +1,9 @@
 prompt="""
-Let's do another exercise pts on a graph!
+We will shortly discuss the concept of chaining.
+Chaining is when a function returns an object itself.
+
+That returned object can then be used for further 
+function calls.
 """
 
 raw_input(prompt)
@@ -36,7 +40,11 @@ print(vec)
 print
 
 prompt="""
-
+Notice how we can have .add multiple times.
+It evaluates each call left to right.  Each
+time it is done finishing one method call
+it returns the object itself, which is used 
+in the next function call.
 """
 raw_input(prompt)
 
@@ -50,7 +58,9 @@ vec = vector(0,0)
 print(vec.multi(5).add(3,3).multi(5000).x)
 
 prompt="""
-
+Notice, we chain different methods with each
+other and even retrieve a attribute in the 
+ending!
 """
 raw_input(prompt)
 
@@ -88,6 +98,7 @@ print(x_coords)
 print 
 
 prompt="""
-We can modify the previous calls to use magic methods as well!
+We can modify the code to chain magic methods.  This results
+in the ability to use + multiple times.
 """
 raw_input(prompt)

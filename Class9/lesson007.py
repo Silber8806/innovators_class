@@ -1,5 +1,7 @@
 prompt="""
-MRO
+We will briefly touch the concept of composition
+by first going through a problem fixed by something
+called the Method Resolution Order (MRO).
 """
 
 raw_input(prompt)
@@ -36,7 +38,17 @@ Jane.introduction()
 print
 
 prompt="""
-Inheritance and Classes
+We have 2 types of employees above!  The first
+type of employee inherits from person first, while
+the second inherits from secret agent.  Both:
+Person and Secret Agent have a introduction method!
+
+Which one will be called by each employee?  In 
+multiple inheritance, the left most class always 
+has precedence!
+
+This is general not a good thing?  There is a good
+chance we unintentionally overwrite methods!
 """
 
 raw_input(prompt)
@@ -66,9 +78,6 @@ class Employee:
 		self.introductions.make_introduction(self.agent_type,name)
 		return 0
 
-prompt="""
-Inheritance and Classes
-"""
 
 Jane = Employee("Jane","standard")
 John = Employee("John","secret agent")
@@ -84,7 +93,17 @@ John.set_introductions(introductions)
 John.introductions()
 
 prompt="""
-Inheritance and Classes
+Alright, so how can we customize the behavior of the introductions
+so that they behave properly.  The answer is we don't use inheritance.
+
+We use the concept of composition.  That is, we have 2 unrelated classes,
+which interact with each other through methods.
+
+In our exmaple, we have Introduction class and a Employee class.  We 
+then use the introduction method to call the make_introductions method
+in Introductions.  This results in isolating changing code in one place
+and not having to consolidate or keep track of changes in inheritance
+(if they will get overwritten...).
 """
 
 raw_input(prompt)
@@ -139,6 +158,7 @@ John.introductions()
 
 
 prompt="""
-Inheritance and Classes
+We modify hte above code to set introductions during the employee creation 
+process.  That simplifes the code above.
 """
 
